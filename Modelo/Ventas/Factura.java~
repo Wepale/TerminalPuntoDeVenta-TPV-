@@ -1,0 +1,132 @@
+package Modelo.Ventas;
+import Modelo.Contenedores.ContenedorTickets;
+import Modelo.Clientes.Cliente;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+
+/**
+ * Write a description of class Factura here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Factura
+{
+    public static final int CODIGO = 1;
+    public static final int FECHA = 2;
+    private String codigo;                      //Código identificativo único
+    private static String cif;                  //El CIF del VENDEDOR
+    private static String razonSocial;          //La razón social del VENDEDOR
+    private ContenedorTickets tickets;          //Los tickets contenidos en esta factura
+    private Cliente cliente;                    //El cliente al que pertenecen la factura
+    private Calendar fecha;                     //La fecha de la factura
+    
+    public Factura(ContenedorTickets tickets, Cliente cliente)
+    {
+        this.cif= cif;
+        this.razonSocial= razonSocial;
+        this.tickets= tickets;
+        this.cliente= cliente;
+        fecha= new GregorianCalendar();
+        codigo = getFecha(CODIGO);
+    }
+    
+    public Factura(Factura otraFactura)
+    {
+        codigo= new String(otraFactura.codigo);
+        cif= new String(otraFactura.cif);
+        razonSocial= new String(otraFactura.razonSocial);
+        tickets= new ContenedorTickets(otraFactura.tickets);
+        cliente= new Cliente(otraFactura.cliente);
+        fecha= otraFactura.fecha;
+    }
+    
+    /**
+     * Devuelve el cif del vendedor
+     * 
+     * @return el cif del vendedor
+     */
+    public String getCif()
+    {
+        return cif;
+    }
+    
+    /**
+     * Devuelve la Razón Social del vendedor
+     * 
+     * @return la razón social del vendedor
+     */
+    public String getRazonSocial()
+    {
+        return razonSocial;
+    }
+    
+    /**
+     * Devuelve los tickets contenidos en esta factura
+     * 
+     * @return ContenedorTickets    Los tickets contenidos en esta factura
+     */
+    public ContenedorTickets getTickets()
+    {
+        return tickets;
+    }
+    
+    /**
+     * Devuelve el cliente al que pertenece esta factura
+     * 
+     * @return  Cliente El cliente al que pertenece esta factura
+     */
+    public Cliente getCliente()
+    {
+        return cliente;
+    }
+    
+    /**
+     * Devuelve la fecha de la factura
+     * 
+     * @return  Calendar    La fecha de la factura
+     */
+    public Calendar getFecha()
+    {
+        return fecha;
+    }
+    
+    /**
+     * Depende del valor introducido como parametro, este método devolverá el código identificativo de la factura,
+     * el cual será la fecha de la creación siguiendo el siguiente formato: 
+     *      
+     *            AAAAMMDDHHmmSS
+     *            
+     * O bien la fecha de creación de la factura siguiente el siguiente formato:
+     * 
+     *           DD/MM/AAAA HH:mm:SS
+     *           
+     *           
+     *   Siendo AAAA=año, MM=mes, DD=dia, HH=hora, mm=minuto, SS=segundo.
+     */
+    public String getFecha(int tipo)
+    {
+        int year=fecha.get(Calendar.YEAR);
+        int month=fecha.get(Calendar.MONTH);
+        int day=fecha.get(Calendar.DAY_OF_MONTH);
+        int hour=fecha.get(Calendar.HOUR_OF_DAY);
+        int minute=fecha.get(Calendar.MINUTE);
+        int second=fecha.get(Calendar.SECOND);
+        
+        String anyo= String.format("%04d", year);
+        String mes= String.format("%02d", (month+1));
+        String dia= String.format("%02d", day);
+        String hora= String.format("%02d", hour);
+        String minuto= String.format("%02d", minute);
+        String segundo= String.format("%02d", second);
+        
+        if(tipo == 1){
+            return anyo.concat(mes).concat(dia).concat(hora).concat(minuto).concat(segundo);
+        }else if(tipo ==2){
+            return dia+"/"+mes+"/"+anyo+" "+hora+":"+minuto+":"+segundo;
+        }else{
+            return "";
+        }
+    }
+}

@@ -1,0 +1,38 @@
+package Vista.PanelesGenerales;
+
+import java.awt.*;
+import javax.swing.*;
+
+/**
+ * Write a description of class PanelSur here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class PanelSur extends JPanel
+{
+    
+    public PanelSur()
+    {
+        super();
+        // ki9setMinimumSize(new Dimension(100,100));
+    } 
+     
+    @Override
+    public Dimension getPreferredSize()
+    {
+       return new Dimension(100,100);   
+    }
+    
+    @Override
+    public Dimension getMinimumSize()
+    {
+       return new Dimension(100,100);   
+    }
+    
+    @Override
+    public Dimension getMaximumSize()
+    {
+       return new Dimension(100,100);   
+    }
+}

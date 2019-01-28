@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=fichero\ objeto
+comment0.target=void\ guardarEnfichero(java.io.File,\ java.lang.Object)
+comment1.params=fichero
+comment1.target=java.lang.Object\ leerDeFichero(java.io.File)
+numComments=2

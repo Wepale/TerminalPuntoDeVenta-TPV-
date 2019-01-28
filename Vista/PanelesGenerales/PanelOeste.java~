@@ -1,0 +1,149 @@
+package Vista.PanelesGenerales;
+
+import Controlador.Productos.VentanaProducto;
+import Controlador.Clientes.*;
+import Controlador.Ventas.*;
+
+import Modelo.Productos.*;
+import Modelo.Contenedores.*;
+import Modelo.Clientes.Cliente;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+
+/**
+ * Write a description of class PanelOeste here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class PanelOeste extends JPanel
+{
+    private final Icon IMAGEN = new ImageIcon(getClass().getResource("tpv.png"));
+    private VentanaProducto formularioProducto;
+    private VentanaCliente formularioCliente;
+    private NuevoTicket ticket;
+    private NuevaFactura factura;
+    private boolean datosCorrectos;
+    
+    public PanelOeste(JFrame frame, ContenedorProductos contenedor, ContenedorClientes lista, ContenedorTickets archivador, ContenedorFacturas archivadorFacturas, JPanel panel)
+    {
+        datosCorrectos = false;
+        crearPanelOeste(frame, contenedor, lista, archivador, panel);
+    }
+    
+    public void crearPanelOeste(JFrame frame, ContenedorProductos contenedor, ContenedorClientes lista, ContenedorTickets archivador, ContenedorFacturas archivadorFacturas, JPanel panel)
+    {
+        setLayout(new GridLayout(10,1,1,1));
+        
+        JLabel etiqueta = new JLabel(IMAGEN);
+        add(etiqueta);
+        
+        JButton nuevoProducto = new JButton("Nuevo Producto");
+        nuevoProducto.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                formularioProducto = new VentanaProducto(contenedor,null);
+            }
+        });
+        add(nuevoProducto);
+        
+        JButton modificarProducto = new JButton("Modificar Producto");
+        modificarProducto.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                String seleccion = JOptionPane.showInputDialog(frame, "Introduzca el código del producto que desea modificar", JOptionPane.QUESTION_MESSAGE);
+            
+                if(seleccion == null){
+                    //Se ha presionado cancelar, no hacer nada
+                }else if(contenedor.existeProducto(seleccion)){
+                    ProductoBase producto = contenedor.buscarCodigo(seleccion);
+                    formularioProducto = new VentanaProducto(contenedor,producto);
+                }else{
+                    JOptionPane.showMessageDialog(frame, "El código introducido no corresponde con ningun producto", "Producto no encontrado", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        add(modificarProducto);
+        
+        JButton eliminarProducto = new JButton("Eliminar Producto");
+        eliminarProducto.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+
+                String seleccion = JOptionPane.showInputDialog(frame, "Introduzca el código del producto que desea eliminar", JOptionPane.QUESTION_MESSAGE);
+                
+                if(seleccion == null){
+                    //Se ha presionado cancelar, no hacer nada
+                }else if(contenedor.existeProducto(seleccion)){
+                    contenedor.eliminarProducto(contenedor.buscarCodigo(seleccion));
+                    JOptionPane.showMessageDialog(frame,"El producto asociado al código " +seleccion+ " se ha eliminado correctamente del inventario",
+                                                        "Operación aceptada", JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(frame, "El código introducido no corresponde con ningun producto", "Producto no encontrado", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        add(eliminarProducto);
+        
+        JButton nuevoCliente = new JButton("Nuevo Cliente");
+        nuevoCliente.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                formularioCliente = new VentanaCliente(frame, lista, archivador, null);
+            }
+        });
+        add(nuevoCliente);
+        
+        JButton modificarCliente = new JButton("Modificar Cliente");
+        modificarCliente.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                String seleccion = JOptionPane.showInputDialog(frame, "Introduzca el código del cliente que desea modificar", JOptionPane.QUESTION_MESSAGE);
+            
+                if(seleccion == null){
+                    //Se ha presionado cancelar, no hacer nada
+                }else if(lista.existeCliente(seleccion)){
+                    Cliente cliente = lista.buscarPorCodigo(seleccion);
+                    formularioCliente = new VentanaCliente(frame, lista, archivador, cliente);
+                }else{
+                    JOptionPane.showMessageDialog(frame, "El código introducido no corresponde con ningun cliente", "Cliente no encontrado", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        add(modificarCliente);
+        
+        JButton eliminarCliente = new JButton("Eliminar Cliente");
+        eliminarCliente.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                String seleccion = JOptionPane.showInputDialog(null, "Introduzca el código del cliente que desea eliminar", JOptionPane.QUESTION_MESSAGE);
+                
+                if(seleccion == null){
+                    //No hacer nada
+                }else if(lista.existeCliente(seleccion)){
+                    lista.eliminarCliente(lista.buscarPorCodigo(seleccion));
+                    JOptionPane.showMessageDialog(null,"El cliente asociado al código " +seleccion+ " se ha eliminado correctamente",
+                                                        "Operación aceptada", JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null, "El código introducido no corresponde con ningun cliente", "Cliente no encontrado", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        add(eliminarCliente);
+        
+        JButton nuevoTicket = new JButton("Nuevo Ticket");
+        nuevoTicket.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                ticket = new NuevoTicket(frame, contenedor, lista, archivador, panel);
+            }
+        });
+        add(nuevoTicket);
+        
+        JButton nuevaFactura = new JButton("Nueva Factura");
+        nuevaFactura.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                factura = new NuevaFactura(frame, lista, archivador, archivadorFacturas);
+            }
+        });
+        add(nuevaFactura);
+        
+    }
+    
+}

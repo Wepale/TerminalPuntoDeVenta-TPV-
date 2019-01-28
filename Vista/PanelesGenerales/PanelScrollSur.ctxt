@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=panel\ barraVertical\ barraHorizontal
+comment0.target=PanelScrollSur(javax.swing.JPanel,\ int,\ int)
+comment1.params=
+comment1.target=java.awt.Dimension\ getPreferredSize()
+comment1.text=\r\n\ Sobreescribimos\ el\ m\u00E9todo\ de\ la\ superclase\ para\ configurar\ su\ tama\u00F1o\ preferido\r\n\ \r\n\ @return\ el\ tama\u00F1o\ preferido\ de\ este\ panel\r\n
+comment2.params=
+comment2.target=java.awt.Dimension\ getMaximumSize()
+comment2.text=\r\n\ Sobreescribimos\ el\ m\u00E9todo\ de\ la\ superclase\ para\ configurar\ su\ tama\u00F1o\ m\u00E1ximo\r\n\ \r\n\ @return\ el\ tama\u00F1o\ m\u00E1ximo\ de\ este\ panel\r\n
+numComments=3

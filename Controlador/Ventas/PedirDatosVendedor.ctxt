@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.params=frame
+comment0.target=PedirDatosVendedor(javax.swing.JFrame)
+comment0.text=\r\n\ Constructor.\ Toda\ la\ labor\ la\ realizar\u00E1\ el\ metodo\ construirPanel(Cliente\ cliente)\r\n
+comment1.params=
+comment1.target=void\ construirPanel()
+comment1.text=\r\n\ Est\u00E9\ m\u00E9todo\ a\u00F1adir\u00E1\ los\ JTextField\ para\ que\ el\ usuario\ pueda\ introducir\ los\ datos\ del\ cliente.\ Cada\ JTextField\ estar\u00E1\ asociado\ a\ su\ JLabel\r\n\ correspondiente\ para\ estar\ correctamente\ diferenciado.\r\n\ \r\n\ @param\ cliente\ \ \ El\ cliente\ que\ se\ quiere\ modificar\ los\ datos,\ null\ si\ se\ quiere\ crear\ un\ nuevo\ cliente\r\n
+comment2.params=
+comment2.target=boolean\ obtenerDatos()
+comment2.text=\r\n\ Este\ m\u00E9todo\ obtendr\u00E1\ los\ datos\ que\ el\ usuario\ haya\ introducido\ en\ los\ JTexfield.\r\n\ \r\n\ La\ \u00FAnica\ condicion\ para\ que\ los\ datos\ sean\ validos\ es\ que\ los\ JTextField\ no\ queden\ vacio\r\n\ \r\n\ @return\ \ false\ si\ alg\u00FAn\ JTextField\ es\ una\ cadena\ vacia,\ true\ en\ caso\ contrario\r\n
+comment3.params=
+comment3.target=void\ guardarDatos()
+comment3.text=\r\n\ Est\u00E9\ m\u00E9todo\ recoger\u00E1\ todos\ los\ datos\ introducidos\ en\ los\ JTextField\ y\ guardar\u00E1\ los\ datos\r\n\ \r\n\ ATENCION\:\ Este\ m\u00E9todo\ no\ comprueba\ que\ los\ datos\ introducidos\ son\ validos,\ por\ ello\ hay\ que\ hacer\ uso\ del\ metodo\ obtenerDatos(...,...)\r\n\ y\ solo\ invocar\ a\ este\ m\u00E9todo\ cuando\ nos\ aseguremos\ que\ los\ datos\ no\ tienen\ nig\u00FAn\ error\ y\ son\ completamente\ v\u00E1lidos\r\n
+comment4.params=frame
+comment4.target=void\ control(javax.swing.JFrame)
+comment4.text=\r\n\ A\u00F1ade\ al\ panelControl\ los\ botones\ "Aceptar"\ y\ "Cancelar"\ \ y\ define\ laa\ acciones\ a\ realizar\ cuando\ se\ presionan.\r\n\ \r\n\ Si\ se\ presiona\ el\ bot\u00F3n\ Aceptar\ se\ recoger\u00E1n\ los\ datos\ introducidos\ por\ el\ usuario.\r\n\ Si\ se\ presiona\ el\ bot\u00F3n\ Cancelar\ se\ cierr\u00E1\ el\ JDialog\ y\ el\ JFrame\ principal\r\n\ \r\n\ @param\ frame\ el\ frame\ padre\r\n
+comment5.params=e
+comment5.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment6.params=e
+comment6.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=7

@@ -1,0 +1,160 @@
+package Modelo.Contenedores;
+import Modelo.Clientes.Cliente;
+import java.util.ArrayList;
+
+/**
+ * Write a description of class ContenedorClientes here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class ContenedorClientes
+{
+    private ArrayList<Cliente> listaClientes;
+    /**
+     * Crea un contendor de clientes vacio
+     */
+    public ContenedorClientes()
+    {
+        listaClientes= new ArrayList<Cliente>();
+    }
+    
+    /**
+     * Crea un nuevo contendor de clientes copiando los clientes de otro contendor
+     */
+    public ContenedorClientes(ContenedorClientes otraListaClientes)
+    {
+        listaClientes= new ArrayList<Cliente>();
+        for(Cliente cliente : otraListaClientes.listaClientes){
+            listaClientes.add(new Cliente(cliente));
+        }
+    }
+    
+    /**
+     * Devuelve la lista en la que se almacen los clientes
+     * 
+     * @return  La lista con los clientes
+     */
+    public ArrayList<Cliente> getListaClientes()
+    {
+        return listaClientes;
+    }
+    
+    /**
+     * Comprueba si la lista de clientes esta vacia
+     * 
+     * @return true si la lista no contiene ningun cliente, false en caso contrario
+     */
+    public boolean estaVacia()
+    {
+        return listaClientes.isEmpty();
+    }
+    
+    /**
+     * Introduce un nuevo cliente en el contendor
+     * 
+     * @param   Cliente   El cliente a introducir
+     */
+    public void insertarCliente(Cliente cliente)
+    {
+        listaClientes.add(cliente);
+    }
+    
+    /**
+     * Método para eliminar un cliente del contendor
+     * 
+     * @param Cliente  El cliente a eliminar
+     */
+    public void eliminarCliente(Cliente cliente)
+    {
+        listaClientes.remove(cliente);
+    }
+    
+    /**
+     * Nos permite buscar un cliente por su codigo
+     * 
+     * @param   String  El código de cliente que queremos buscar
+     * @return  Cliente El cliente asociado a dicho código
+     */
+    public Cliente buscarPorCodigo(String codigo)
+    {
+        String codigoMod = new String(AyudaBusqueda.modCadena(codigo));
+        for(Cliente cliente : listaClientes){
+            if(cliente.getCodigo().equals(codigoMod))
+                return cliente;
+        }
+        return null;
+    }
+    
+    /**
+     * Nos permite saber si existe un cliente mediante su codigo
+     * 
+     * @param   String  El código de cliente que queremos buscar
+     * @return  boolean true si existe el cliente, false en caso contrario
+     */
+    public boolean existeCliente(String codigo)
+    {
+        String codigoMod = new String(AyudaBusqueda.modCadena(codigo));
+        for(Cliente cliente : listaClientes){
+            if(cliente.getCodigo().equals(codigoMod))
+                return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Nos permite saber si existe un cliente mediante su nombre
+     * 
+     * @param   String  El código de cliente que queremos buscar
+     * @return  boolean true si existe el cliente, false en caso contrario
+     */
+    public boolean existeNombre(String nombre)
+    {
+        ContenedorClientes lista = buscarPorNombre(nombre);
+        if(lista == null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    /**
+     * Nos permite buscar un cliente por su nif
+     * 
+     * @param   nif  El nif de cliente que queremos buscar
+     * @return  Cliente El cliente asociado a dicho nif
+     */
+    public Cliente buscarPorNif(String nif)
+    {
+        String nifMod = new String(AyudaBusqueda.modCadena(nif));
+        for(Cliente cliente : listaClientes){
+            if(cliente.getNif().equals(nifMod)){
+                return cliente;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Nos permite buscar un cliente por su nombre o razón social
+     * 
+     * @param   nombre  El nombre/razón social del cliente que queremos buscar
+     * @return  Cliente El cliente asociado a dicho nombre/razón social
+     */
+    public ContenedorClientes buscarPorNombre(String nombre)
+    {
+        ContenedorClientes lista = new ContenedorClientes();
+        String[] encontrar = AyudaBusqueda.separar(nombre);     //Separá cada palabra del parametro nombre,las pasa a minusculas y mete cada una en un array
+        for(Cliente cliente : listaClientes){
+            String nombreModificado = AyudaBusqueda.modCadena(cliente.getNombre()); //Se extrae el nombre del cliente y se pasa a minuscula
+            if(AyudaBusqueda.coincideTodo(nombreModificado, encontrar)){
+                lista.insertarCliente(cliente);
+            }
+        }
+        if(lista.estaVacia()){
+            return null;
+        }else{
+            return lista;
+        }
+    }
+}

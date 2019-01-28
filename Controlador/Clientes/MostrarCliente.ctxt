@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.params=
+comment0.target=java.lang.String\ preguntarAtributo()
+comment0.text=\r\n\ Permite\ seleccionar\ por\ que\ atributo\ se\ quiere\ buscar\ a\ los\ clientes.\r\n\ Las\ opciones\ ser\u00E1n\:\ Por\ c\u00F3digo\ por\ nombre\ y\ ver\ todos\ los\ clientes\r\n\ \r\n\ @return\ \ String\ con\ la\ opci\u00F3n\ seleccionada\r\n
+comment1.params=frame\ lista\ seleccion
+comment1.target=Modelo.Contenedores.ContenedorClientes\ buscarPorAtributo(javax.swing.JFrame,\ Modelo.Contenedores.ContenedorClientes,\ java.lang.String)
+comment1.text=\r\n\ Nos\ permite\ encontrar\ en\ un\ lista\ de\ clientes\ aquellos\ que\ concuerden\ con\ los\ datos\ introducidos\ por\ el\ usuario\ y\ el\ atributo\ seleccionado\r\n\ \r\n\ @param\ frame\ el\ frame\ padre\r\n\ @param\ \ \ lista\ La\ lista\ donde\ estar\u00E1n\ contenidos\ los\ clientes\r\n\ @param\ \ \ seleccion\ la\ opcion\ de\ busqueda\ elegida\r\n\ \r\n\ @return\ \ ContendorClientes\ \ \ Todos\ los\ clientes\ que\ concuerden\ con\ los\ datos\ introducidos\ por\ el\ usuario\r\n
+comment2.params=panel
+comment2.target=void\ imprimirCabecera(javax.swing.JPanel)
+comment2.text=\r\n\ La\ cabecera\ para\ organizar\ los\ datos\ de\ los\ clientes\r\n\r\n\ @param\ panel\ El\ panel\ donde\ se\ va\ a\ introducir\ esta\ cabecera\r\n
+comment3.params=lista\ panel
+comment3.target=void\ imprimirClientes(Modelo.Contenedores.ContenedorClientes,\ javax.swing.JPanel)
+comment3.text=\r\n\ Muestra\ la\ informaci\u00F3n\ de\ los\ clientes\ en\ un\ JPanel\r\n\ \r\n\ @param\ \ \ lista\ \ Los\ clientes\ que\ queremos\ mostrar\r\n\ @param\ \ \ panel\ \ El\ JPanel\ donde\ se\ mostraran\r\n
+comment4.params=lista\ panel
+comment4.target=void\ cuadricular(Modelo.Contenedores.ContenedorClientes,\ javax.swing.JPanel)
+comment4.text=\r\n\ Organiza\ la\ informacion\ de\ los\ clientes\ en\ el\ JPanel\r\n\ \r\n\ @param\ lista\ \ Una\ lista\ con\ clientes\ (debe\ ser\ la\ misma\ lista\ de\ clientes\ que\ se\ utilizo\ para\ rellenar\ el\ JPanel)\r\n\ @param\ panel\ El\ JPanel\ a\ ordenar,\ con\ la\ informacion\ ya\ introducida\ en\ \u00E9l\r\n
+comment5.params=frame\ listaClientes\ panel
+comment5.target=void\ imprimirResultados(javax.swing.JFrame,\ Modelo.Contenedores.ContenedorClientes,\ javax.swing.JPanel)
+comment5.text=\r\n\ Hace\ uso\ de\ todos\ los\ m\u00E9todos\ anteriores.\ Pregunta\ al\ usuario\ por\ que\ atributo\ desea\ buscar\ a\ los\ clientes\ y\ los\ muestra\ por\ pantalla\r\n\ \r\n\ @param\ \ \ lista\ \ \ Contiene\ los\ clientes\ en\ los\ que\ se\ quiere\ buscar\ conincidencias\r\n\ @param\ \ \ panel\ \ \ El\ JPanel\ donde\ se\ mostrar\u00E1n\ los\ clientes\r\n
+numComments=6

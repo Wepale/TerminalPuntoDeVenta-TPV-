@@ -1,0 +1,98 @@
+package Controlador.Clientes;
+
+import Modelo.Clientes.Cliente;
+
+import java.awt.*:
+import javax.swing.*;
+
+
+/**
+ * Write a description of class BusquedaCliente2 here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class BusquedaCliente2
+{
+    /**
+     * Este método preguntará al usuario por que atributo quiere buscar al cliente al que se le realizará la venta. Las opciones serán por nombre o código.
+     * El sistema támbien permitirá la opcion de realizar la venta a un cliente ocasional, el cual no existe en nuestro sistema
+     * 
+     * @return  la opcion seleccionada
+     */
+    public String preguntarAtributoCliente(JFrame frame)
+    {
+        Object seleccion = JOptionPane.showInputDialog(
+                                        frame,
+                                        "Por seleccione, seleccione como desea seleccionar al cliente al que se le realizará la venta.\n\n",
+                                        "Seleccione cliente",
+                                        JOptionPane.QUESTION_MESSAGE,
+                                        null,  // null para icono defecto
+                                        new String[] { OPCION_1, OPCION_2, OPCION_7, N_OCASIONAL }, 
+                                        OPCION_1);
+        return (String)seleccion;
+    }
+    
+    /**
+     * Este método pregunta al usuario el código del cliente al que se le quiere realizar la venta
+     * 
+     * @param listaClientes Los clientes que existen en el sistema
+     */
+    
+    public Cliente preguntarCodigo(JFrame frame, ContenedorProductos inventario, ContenedorClientes listaClientes, ContenedorTickets archivador, JPanel panel)
+    {
+        String seleccion = JOptionPane.showInputDialog(frame, "Introduzca el código del cliente\n\n", JOptionPane.QUESTION_MESSAGE);
+        if(seleccion == null){
+            //Se ha seleccionado cancelar, no hacer nada
+        }else if(listaClientes.existeCliente(seleccion)){
+            cliente = listaClientes.buscarPorCodigo(seleccion);
+        }else{
+            JOptionPane.showMessageDialog(frame, "El código introducido no corresponde con ningún cliente.\n\nIntentelo de nuevo\n\n", "Cliente no encontrado", JOptionPane.ERROR_MESSAGE);
+            preguntarCodigo(frame, inventario, listaClientes, archivador, panel);
+        }
+    }
+    
+    /**
+     * Este método pregunta al usuario el nombre del cliente al que se le desea realizar la venta. Si existen varias coincidencias se le pedirá
+     * que seleccione el cliente adecuado
+     * 
+     * @param listaClientes    Los clientes que existen en el sistema
+     */
+    public void preguntarNombre(JFrame frame, ContenedorProductos inventario, ContenedorClientes listaClientes, ContenedorTickets archivador, JPanel panel)
+    {
+        String seleccion = JOptionPane.showInputDialog(frame, "Introduzca el Nombre/Razon Social del cliente al que se le realizará la venta\n\n", JOptionPane.QUESTION_MESSAGE);
+        if(seleccion == null){
+            //se ha presionado cancelar, no hacer nada
+            realizarVenta(frame, inventario, listaClientes, archivador, panel);
+        }else if(listaClientes.existeNombre(seleccion)){
+            ContenedorClientes resultados = listaClientes.buscarPorNombre(seleccion);
+            if(resultados.getListaClientes().size() == 1){ //Solo existe un cliente con coincidencias
+                cliente = resultados.getListaClientes().get(0);
+            }else{  //Existe más de un cliente con coincidencias, se le pedirá al usuario que eligá el que desee
+                verClientes(frame, inventario, listaClientes, archivador, resultados, panel);
+            }
+        }else{
+            JOptionPane.showMessageDialog(frame, "No se han encontrado coincidencias con el Nombre/Razon Social introducido.\n\nIntentelo de nuevo\n\n", "Cliente no encontrado", JOptionPane.ERROR_MESSAGE);
+            preguntarNombre(frame, inventario, listaClientes, archivador, panel);
+        }
+    }
+    
+    /**
+     * Esté metodo abre un JDialog para que el usuario seleccione uno de los clientes que estén contenidos en el objeto ContenedorClientes que se le pasa como parametro.
+     * 
+     * El cliente seleccionado se guardará en la variable de instancia "cliente".
+     * 
+     * @param listaClientes Los clientes que apareceran en el JDialog
+     */
+    public void verClientes(JFrame frame, ContenedorProductos inventario, ContenedorClientes listaClientes, ContenedorTickets archivador, ContenedorClientes otraListaClientes, JPanel panel)
+    {
+        elegirCliente = new SeleccionarCliente(frame, otraListaClientes); //JDialog
+        String codigo = elegirCliente.getCodigoCliente();
+        if (codigo == null){
+            //Se ha presionado cancelar o se ha cerrado el JDialog, no hacer nada
+            realizarVenta(frame, inventario, listaClientes, archivador, panel);
+        }else{
+            cliente = otraListaClientes.buscarPorCodigo(codigo);
+        }
+    }
+}

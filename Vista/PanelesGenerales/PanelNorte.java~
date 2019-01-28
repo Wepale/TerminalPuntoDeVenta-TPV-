@@ -1,0 +1,76 @@
+package Vista.PanelesGenerales;
+import Modelo.Contenedores.*;
+import Controlador.Productos.*;
+import Controlador.Clientes.*;
+import Controlador.Ventas.*;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+/**
+ * Write a description of class PanelNorte here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class PanelNorte extends JPanel
+{
+    private MostrarProducto resultadoProducto;
+    private BusquedaCliente resultadoCliente;
+    private VisualizarTicket resultadoTicket;
+    private VisualizarFactura resultadoFactura;
+    
+    public PanelNorte(JFrame frame, ContenedorProductos contenedor, ContenedorClientes lista,
+                      ContenedorTickets archivador, ContenedorFacturas archivadorFacturas, JPanel panel)
+    {
+        resultadoProducto = new MostrarProducto();
+        resultadoCliente = new BusquedaCliente();
+        resultadoTicket = new VisualizarTicket();
+        resultadoFactura = new ResultadoFactura();
+        crearPanelNorte(frame, contenedor, lista, archivador, archivadorFacturas, panel);
+    }
+    
+    public void crearPanelNorte(JFrame frame, ContenedorProductos contenedor, ContenedorClientes lista,
+                                ContenedorTickets archivador, ContenedorFacturas archivadorFacturas, JPanel panel)
+    {
+        setLayout(new FlowLayout());
+        
+        JButton botonProductos = new JButton("Ver Inventario");
+        botonProductos.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                resultadoProducto.imprimirResultados(frame, contenedor, panel);
+            }
+        });
+        add(botonProductos);
+        
+        JButton botonClientes = new JButton("Ver Clientes");
+        botonClientes.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                resultadoCliente.imprimirResultados(lista, panel);
+            }
+        });
+        add(botonClientes);
+        
+        JButton botonTickets = new JButton("Ver tickets");
+        botonTickets.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                resultadoTicket.imprimirResultados(frame, archivador, panel);
+            }
+        });
+        add(botonTickets);
+        
+        JButton botonFacturas = new JButton("Ver Facturas");
+        botonFacturas.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                resultadoFactura.imprimirResultados(frame, archivadorFacturas, panel);
+            }
+        });
+        add(botonFacturas);
+        
+        JButton botonListados = new JButton("Ver Listados");
+        add(botonListados);
+        
+    }
+}                  
+

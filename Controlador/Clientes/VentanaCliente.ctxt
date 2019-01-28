@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=frame\ listaClientes\ archivador\ cliente
+comment0.target=VentanaCliente(java.awt.Frame,\ Modelo.Contenedores.ContenedorClientes,\ Modelo.Contenedores.ContenedorTickets,\ Modelo.Clientes.Cliente)
+comment0.text=\r\n\ Constructor\ del\ JDialog.\ Crer\u00E1\ una\ ventana\ completamente\ funcional\ donde\ el\ usuario\ introducir\u00E1\ la\ informaci\u00F3n\ del\ cliente\r\n\ \r\n\ @param\ frame\ El\ JFrame\ padre\r\n\ @param\ listaClientes\ Los\ clientes\ dados\ de\ alta\ en\ el\ sistema\r\n\ @param\ archivador\ Los\ tickets\ de\ las\ ventas\ realizadas\r\n\ @param\ cliente\ El\ cliente\ que\ se\ quiere\ modificar,\ null\ se\ se\ quiere\ crear\ un\ nuevo\ cliente\r\n
+comment1.params=frame\ listaClientes\ archivador\ cliente
+comment1.target=void\ control(java.awt.Frame,\ Modelo.Contenedores.ContenedorClientes,\ Modelo.Contenedores.ContenedorTickets,\ Modelo.Clientes.Cliente)
+comment1.text=\r\n\ A\u00F1ade\ al\ panelControl\ los\ botones\ Aceptar\ y\ Cancelar\ y\ define\ las\ acciones\ a\ realizar\ si\ se\ presionan.\r\n\ \r\n\ Si\ se\ presiona\ el\ boton\ Aceptar\ se\ recoger\u00E1n\ los\ datos\ introducidos\ por\ el\ usuario.\r\n\ Si\ se\ presiones\ el\ boton\ Cancelar\ se\ cerrar\u00E1\ el\ JDialog\r\n\ \r\n\ @param\ frame\ el\ frame\ padre\r\n\ @param\ listaClientes\ Los\ clientes\ dados\ de\ alta\ en\ el\ sistema\r\n\ @param\ archivador\ Los\ tickets\ de\ las\ ventas\ realizadas\r\n\ @param\ cliente\ El\ cliente\ que\ se\ quiere\ modificar,\ null\ se\ se\ quiere\ crear\ un\ nuevo\ cliente\r\n
+comment2.params=e
+comment2.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment3.params=e
+comment3.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=4

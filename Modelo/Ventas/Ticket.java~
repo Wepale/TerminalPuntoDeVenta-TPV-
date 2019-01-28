@@ -1,0 +1,108 @@
+package Modelo.Ventas;
+import Modelo.Contenedores.ContenedorProductos;
+import Modelo.Clientes.Cliente;
+import Modelo.Productos.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+/**
+ * Está clase se encargará de realizar los tickets válidos. Una vez creado un ticket, los productos que figuran en él permaneceran inalterables aunque alguna
+ * información de los mismos productos que hemos vendido se modifiquen en el almacen.
+ * 
+ * Esto es totalmente necesario, ya que estos tickets representan una venta y se usaran para efectos fiscales, por lo que deben de reflegar los productos
+ * con la misma información que tenian en el momento de su venta.
+ * 
+ * @author Yeray Rodríguez Martín
+ * @version 1.0
+ */
+public class Ticket 
+{
+    private String codigo;
+    private Calendar fecha;                     //La fecha y hora del ticket
+    private ContenedorProductos productos;      //Los productos contenidos en el ticket
+    private Cliente cliente;                    //El cliente al que pertenece el ticket
+    public static final int CODIGO = 1; 
+    public static final int FECHA = 2;
+    public Ticket(ContenedorProductos ticketPrueba, Cliente cliente)
+    {
+        fecha = new GregorianCalendar();
+        productos = new ContenedorProductos(ticketPrueba);
+        this.cliente = new Cliente(cliente);
+        codigo = getFecha(CODIGO);
+    }
+    
+    public Ticket(Ticket otroTicket)
+    {
+        fecha= otroTicket.fecha;
+        productos = new ContenedorProductos(otroTicket.productos);
+        cliente = new Cliente(otroTicket.cliente);
+    }
+    
+    /**
+     * Método para acceder a la fecha del ticket
+     */
+    public Calendar getFecha()
+    {
+        return fecha;
+    }
+    
+    /**
+     * Método para acceder a los productos contenidos en el ticket
+     */
+    public ContenedorProductos getProductos()
+    {
+        return productos;
+    }
+    
+    /**
+     * Metodo para acceder al cliente del ticket
+     * 
+     * @return  Cliente El cliente al que pertenece el ticket
+     */
+    public Cliente getCliente()
+    {
+        return cliente;
+    }
+    
+    /**
+     * Este método devolverá el código identificativo del ticket, el cual será la fecha de la creación del ticket siguiendo el siguiente formato: 
+     *      
+     *            AAAAMMDDHHmmSS donde AAAA=año, MM=mes, DD=dia, HH=hora, mm=minuto, SS=segundo. 
+     */
+    public String getFecha(int tipo)
+    {
+        int year=fecha.get(Calendar.YEAR);
+        int month=fecha.get(Calendar.MONTH);
+        int day=fecha.get(Calendar.DAY_OF_MONTH);
+        int hour=fecha.get(Calendar.HOUR_OF_DAY);
+        int minute=fecha.get(Calendar.MINUTE);
+        int second=fecha.get(Calendar.SECOND);
+        
+        String anyo= String.format("%04d", year);
+        String mes= String.format("%02d", (month+1));
+        String dia= String.format("%02d", day);
+        String hora= String.format("%02d", hour);
+        String minuto= String.format("%02d", minute);
+        String segundo= String.format("%02d", second);
+        
+        if(tipo == 1){
+            return anyo.concat(mes).concat(dia).concat(hora).concat(minuto).concat(segundo);
+        }else if(tipo ==2){
+            return dia+"/"+mes+"/"+anyo+" "+hora+":"+minuto+":"+segundo;
+        }else{
+            return "";
+        }
+    }
+    
+    /**
+     * Método para calcular el precio total de todos los productos que existen el ticket teniendo un cuenta las unidades vendidas
+     */
+    public double valorProductos()
+    {
+        double total=0;
+        for(ProductoBase producto : productos.getContenedor()){
+            total += producto.getVendido()*producto.getPrecioIva();
+        }
+    }
+}

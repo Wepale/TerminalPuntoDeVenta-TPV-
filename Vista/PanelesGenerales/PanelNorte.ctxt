@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.params=frame\ inventario\ lista\ archivador\ archivadorFacturas\ panel
+comment0.target=PanelNorte(javax.swing.JFrame,\ Modelo.Contenedores.ContenedorProductos,\ Modelo.Contenedores.ContenedorClientes,\ Modelo.Contenedores.ContenedorTickets,\ Modelo.Contenedores.ContenedorFacturas,\ javax.swing.JPanel)
+comment0.text=\r\n\ El\ contructor\ crea\ un\ JPanel\ completamete\ funcional.\ Crear\u00E1\ los\ botones,\ los\ cuales\ poseeran\ cada\ uno\ su\ acci\u00F3n\ particular.\r\n\ \r\n\ Todo\ el\ trabajo\ recae\ sobre\ el\ m\u00E9todo\ crearPanelNorte(....)\r\n\ \r\n\ @param\ frame\ el\ frame\ padre\r\n\ @param\ inventario\ el\ inventario\ donde\ se\ almacenan/almacenar\u00E1n\ todos\ los\ productos\r\n\ @param\ lista\ la\ lista\ de\ cliente\ que\ contiene/contendr\u00E1\ todos\ los\ clientes\ dados\ de\ alta\ en\ el\ sistema\r\n\ @param\ archivador\ el\ archivador\ de\ tickets\ que\ contiene/contendr\u00E1\ todos\ los\ tickets\r\n\ @param\ archivadorFacturas\ el\ archivador\ que\ contiene/contendr\u00E1\ todas\ las\ facturas\ de\ nuestro\ sistema\r\n\ @param\ panel\ el\ panel\ donde\ se\ visualizar\u00E1\ la\ informaci\u00F3n\ de\ productos,\ clientes,\ tickets\ o\ facturas.\ En\ nuestro\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ caso\ ser\u00E1\ el\ panel\ cental\ del\ contendor\ del\ JFrame.\ Recordemos\ que\ usa\ un\ gestor\ BorderLayout\r\n
+comment1.params=frame\ inventario\ lista\ archivador\ archivadorFacturas\ panel
+comment1.target=void\ crearPanelNorte(javax.swing.JFrame,\ Modelo.Contenedores.ContenedorProductos,\ Modelo.Contenedores.ContenedorClientes,\ Modelo.Contenedores.ContenedorTickets,\ Modelo.Contenedores.ContenedorFacturas,\ javax.swing.JPanel)
+comment1.text=\r\n\ Crea\ todos\ los\ JButton\ y\ les\ asigna\ sus\ acciones.\ Inicializa\ el\ JPanel\ e\ introduce\ los\ JButton\ en\ \u00E9l.\r\n\ \r\n\ @param\ frame\ el\ frame\ padre\r\n\ @param\ inventario\ el\ inventario\ donde\ se\ almacenan/almacenar\u00E1n\ todos\ los\ productos\r\n\ @param\ lista\ la\ lista\ de\ cliente\ que\ contiene/contendr\u00E1\ todos\ los\ clientes\ dados\ de\ alta\ en\ el\ sistema\r\n\ @param\ archivador\ el\ archivador\ de\ tickets\ que\ contiene/contendr\u00E1\ todos\ los\ tickets\r\n\ @param\ archivadorFacturas\ el\ archivador\ que\ contiene/contendr\u00E1\ todas\ las\ facturas\ de\ nuestro\ sistema\r\n\ @param\ panel\ el\ panel\ donde\ se\ visualizar\u00E1\ la\ informaci\u00F3n\ de\ productos,\ clientes,\ tickets\ o\ facturas.\ En\ nuestro\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ caso\ ser\u00E1\ el\ panel\ cental\ del\ contendor\ del\ JFrame.\ Recordemos\ que\ usa\ un\ gestor\ BorderLayout\r\n
+comment2.params=e
+comment2.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment3.params=e
+comment3.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment4.params=e
+comment4.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment5.params=e
+comment5.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment6.params=e
+comment6.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=7

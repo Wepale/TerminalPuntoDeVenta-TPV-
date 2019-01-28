@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.params=frame\ inventario\ producto
+comment0.target=VentanaProducto(javax.swing.JFrame,\ Modelo.Contenedores.ContenedorProductos,\ Modelo.Productos.ProductoBase)
+comment0.text=\r\n\ Constructor\ de\ est\u00E1\ clase.\ Utilizar\u00E1\ todos\ los\ m\u00E9todos\ privados\ de\ esta\ clase\ para\ crear\ un\ JDialog\ donde\ usuario\ pueda\ introducir\ o\ modificar\ los\ datos\ de\r\n\ un\ produto.\r\n\ \r\n\ @param\ frame\ el\ frame\ padre\r\n\ @param\ inventario\ El\ luegar\ en\ el\ que\ se\ almacenan\ los\ productos\r\n\ @param\ producto\ Si\ es\ null,\ indica\ que\ se\ est\u00E1\ creando\ un\ producto\ nuevo.\ Si\ es\ un\ objeto\ de\ la\ clase\ ProductoBase\ o\ sus\ clases\ hijas,\ se\ modificar\u00E1\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dicho\ producto.\r\n
+comment1.params=
+comment1.target=VentanaProducto()
+comment2.params=
+comment2.target=java.lang.String\ getCrear1()
+comment3.params=
+comment3.target=java.lang.String\ getCrear2()
+comment4.params=
+comment4.target=java.lang.String\ getCrear3()
+comment5.params=frame\ producto
+comment5.target=void\ formulario(javax.swing.JFrame,\ Modelo.Productos.ProductoBase)
+comment5.text=\r\n\ Debido\ a\ que\ nuestro\ sistema\ puede\ albergar\ 3\ clases\ de\ productos\ distintos,\ este\ m\u00E9todo\ ser\u00E1\ el\ encargado,\ en\ el\ momento\ en\ el\ que\ usuario\r\n\ quiera\ dar\ de\ alta\ un\ producto,\ de\ preguntar\ que\ clase\ de\ producto\ se\ quiere\ dar\ de\ alta.\r\n\ \r\n\ @param\ frame\ el\ frame\ padre\r\n\ @param\ producto\ Si\ es\ null,\ indica\ que\ se\ est\u00E1\ creando\ un\ producto\ nuevo.\ Si\ es\ un\ objeto\ de\ la\ clase\ ProductoBase\ o\ sus\ clases\ hijas,\ se\ modificar\u00E1\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dicho\ producto.\r\n
+comment6.params=frame\ inventario\ producto
+comment6.target=void\ control(javax.swing.JFrame,\ Modelo.Contenedores.ContenedorProductos,\ Modelo.Productos.ProductoBase)
+comment6.text=\r\n\ Este\ m\u00E9todo\ ser\u00E1\ el\ encargado\ de\ crear\ los\ dos\ botones,\ "Aceptar"\ y\ "Cancelar"\ y\ asignarles\ sus\ acciones.\ Posteriormente\ se\ introducir\u00E1n\ en\ un\ panel\ con\r\n\ disposicion\ FlowLayout.\r\n\ \r\n\ Presionando\ el\ boton\ "Aceptar",\ el\ usuario\ introduce\ los\ datos\ del\ producto\ en\ el\ sistema\ y\ presionando\ cancelar\ cierra\ el\ JDialog.\r\n\ \r\n\ @param\ frame\ el\ frame\ padre\r\n\ @param\ inventario\ \ \ \ El\ lugar\ donde\ se\ almecenan\ los\ produtos\r\n\ @param\ producto\ \ \ \ \ \ Si\ es\ null,\ indica\ que\ se\ est\u00E1\ creando\ un\ producto\ nuevo.\ Si\ es\ un\ objeto\ de\ la\ clase\ ProductoBase\ o\ sus\ clases\ hijas,\ se\ modificar\u00E1\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dicho\ producto.\r\n
+comment7.params=e
+comment7.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment8.params=e
+comment8.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=9

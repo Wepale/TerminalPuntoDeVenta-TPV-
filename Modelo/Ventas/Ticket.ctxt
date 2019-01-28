@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.params=productosAVender\ cliente
+comment0.target=Ticket(Modelo.Contenedores.ContenedorProductos,\ Modelo.Clientes.Cliente)
+comment0.text=\r\n\ Crear\u00E1\ un\ ticket\ pasandole\ los\ productos\ a\ vender\ y\ el\ cliente\ al\ que\ se\ le\ realiza\ la\ venta\r\n\ \r\n\ @param\ ContenedorProductos\ con\ los\ productos\ a\ vender\r\n\ @param\ Cliente\ el\ cliente\ al\ que\ se\ le\ realizar\u00E1\ la\ venta\r\n
+comment1.params=otroTicket
+comment1.target=Ticket(Ticket)
+comment1.text=\r\n\ Copiar\u00E1\ otro\ ticket\ y\ crear\u00E1\ una\ instancia\ completamente\ nueva.\ \r\n\ \r\n\ @param\ otroTicket\ el\ ticket\ que\ se\ desea\ copiar\r\n
+comment2.params=
+comment2.target=java.util.Calendar\ getFecha()
+comment2.text=\r\n\ M\u00E9todo\ para\ acceder\ a\ la\ fecha\ del\ ticket\r\n\ \r\n\ @return\ Calendar\ la\ fecha\ del\ ticket\ en\ formato\ Calendar\r\n
+comment3.params=
+comment3.target=Modelo.Contenedores.ContenedorProductos\ getProductos()
+comment3.text=\r\n\ M\u00E9todo\ para\ acceder\ a\ los\ productos\ contenidos\ en\ el\ ticket\r\n\ \r\n\ @return\ ContenedorProductos\ los\ productos\ contenidos\ en\ el\ ticket\r\n
+comment4.params=
+comment4.target=Modelo.Clientes.Cliente\ getCliente()
+comment4.text=\r\n\ Metodo\ para\ acceder\ al\ cliente\ del\ ticket\r\n\ \r\n\ @return\ \ Cliente\ El\ cliente\ al\ que\ pertenece\ el\ ticket\r\n
+comment5.params=tipo
+comment5.target=java.lang.String\ getFecha(int)
+comment5.text=\r\n\ Depende\ del\ valor\ introducido\ como\ parametro,\ este\ m\u00E9todo\ devolver\u00E1\ el\ c\u00F3digo\ identificativo\ de\ la\ factura,\r\n\ el\ cual\ ser\u00E1\ la\ fecha\ de\ la\ creaci\u00F3n\ siguiendo\ el\ siguiente\ formato\:\ \r\n\ \ \ \ \ \ \r\n\ \ \ \ \ \ \ \ \ \ \ \ AAAAMMDDHHmmSS\r\n\ \ \ \ \ \ \ \ \ \ \ \ \r\n\ O\ bien\ la\ fecha\ de\ creaci\u00F3n\ de\ la\ factura\ en\ un\ String\ siguiente\ el\ siguiente\ formato\:\r\n\ \r\n\ \ \ \ \ \ \ \ \ \ \ DD/MM/AAAA\ HH\:mm\:SS\r\n\ \ \ \ \ \ \ \ \ \ \ \r\n\ \ \ \ \ \ \ \ \ \ \ \r\n\ \ \ Siendo\ AAAA\=a\u00F1o,\ MM\=mes,\ DD\=dia,\ HH\=hora,\ mm\=minuto,\ SS\=segundo.\r\n\ \ \ \ \ \ \ \ \ \ \ \ \r\n\ @param\ tipo\ la\ variable\ final\ CODIGO\ si\ se\ desea\ el\ c\u00F3digo\ o\ la\ variable\ final\ FECHA\ si\ se\ desea\ la\ fecha.\ Si\ se\ introduce\ otro\ valor,\r\n\ \ \ \ \ \ \ \ devolver\u00E1\ una\ cadena\ vac\u00EDa\r\n\ \r\n\ @return\ String\ la\ fecha\ en\ formato\ String\ o\ el\ c\u00F3digo.\r\n
+comment6.params=
+comment6.target=double\ valorProductos()
+comment6.text=\r\n\ M\u00E9todo\ para\ calcular\ el\ precio\ total\ de\ todos\ los\ productos\ que\ existen\ el\ ticket\ teniendo\ un\ cuenta\ las\ unidades\ vendidas\r\n\ \r\n\ @return\ el\ valor\ total\ de\ los\ productos\ contenidos\ en\ el\ ticket\r\n
+numComments=7

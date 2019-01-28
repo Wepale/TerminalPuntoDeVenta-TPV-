@@ -1,0 +1,142 @@
+package Controlador.Ventas;
+
+import Modelo.Clientes.Cliente;
+import Modelo.Ventas.Factura;
+import Modelo.Contenedores.ContenedorClientes;
+import Modelo.Contenedores.ContenedorTickets;
+import Modelo.Contenedores.ContenedorFacturas;
+
+import Controlador.Clientes.BusquedaCliente;
+import Controlador.Clientes.SeleccionarCliente;
+
+import java.awt.*;
+import javax.swing.*;
+
+
+/**
+ * Write a description of class NuevaFactura here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class NuevaFactura
+{
+    private Cliente cliente;
+    private int anyoFiscal;
+    
+    private BusquedaCliente preguntarCliente;
+    private SeleccionarCliente elegirCliente;
+    private SeleccionarTicket elegirTicket;
+    private final String OPCION_1 = "Buscar por código";
+    private final String OPCION_2 = "Buscar por nombre";
+    private final String OPCION_3 = "Mostrar todos los clientes";
+   
+    public NuevaFactura(JFrame frame, ContenedorClientes listaClientes, ContenedorTickets archivador, ContenedorFacturas archivadorFacturas)
+    {
+        preguntarCliente = new BusquedaCliente();
+        cliente = null;
+        anyoFiscal = 0;
+        realizarFactura(frame, listaClientes, archivador, archivadorFacturas);
+    }
+    
+    /**
+     * Permite seleccionar por que atributo se buscara al cliente al que se le realizará la factura
+     * 
+     * Las opciones serán por código del cliente y por Nombre/Razon Social
+     * 
+     * @return  String con la opción seleccionada
+     */
+    
+    public String preguntarAtributo(JFrame frame)
+    {
+        Object seleccion = JOptionPane.showInputDialog(
+        frame,
+        "¿Como desa buscar al cliente al que se le realizará la factura?\n\n",
+        "Buscar Clientes",
+        JOptionPane.QUESTION_MESSAGE,
+        null,  // null para icono defecto
+        new String[] { OPCION_3, OPCION_1, OPCION_2,}, 
+                       OPCION_3); //Opción por defecto
+                       
+        return (String)seleccion;
+    }
+    
+    public void preguntarAnyoFiscal(JFrame frame, ContenedorClientes listaClientes, ContenedorTickets archivador, ContenedorFacturas archivadorFacturas)
+    {
+        boolean tryActivado = false;
+        String fiscal = JOptionPane.showInputDialog(frame,"Introduzca el año fiscal que desea facturar\n\n", JOptionPane.QUESTION_MESSAGE);
+        if(fiscal == null){
+            //Se ha cancelado o cerra el JOptionPane, se vuelve a preguntar el cliente
+            realizarFactura(frame, listaClientes, archivador, archivadorFacturas);
+        }else if(fiscal.length() > 0 && fiscal.length() != 4){
+            JOptionPane.showMessageDialog(frame, "Debe introducir un número entero de 4 dígitos\n\n", "Dato no válido", JOptionPane.ERROR_MESSAGE);
+            preguntarAnyoFiscal(frame, listaClientes, archivador, archivadorFacturas);
+        }else{
+            try{
+                int anyoFiscal = Integer.parseInt(fiscal.trim());
+            }catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(frame, "Debe introducir un número entero\n\n", "Dato no válido", JOptionPane.ERROR_MESSAGE);
+                preguntarAnyoFiscal(frame, listaClientes, archivador, archivadorFacturas);
+                tryActivado = true;
+            }
+            if(tryActivado){
+                //Para que no continue con la ejecucion despues de que la llamada recursiva haya acabado
+            }else{
+                this.anyoFiscal = Integer.parseInt(fiscal.trim());
+                preguntarTickets(frame, listaClientes, archivador, archivadorFacturas);
+            }
+        }
+    }
+    
+    public void preguntarCliente(JFrame frame, ContenedorClientes listaClientes, ContenedorTickets archivador)
+    {
+        cliente = null;
+        String eleccion = preguntarAtributo(frame);
+        if(eleccion == null){
+            //Se ha cancelado o cerrado el JOptionPane, no hacer nada
+            JOptionPane.showMessageDialog(frame,"La creación de la factura se ha cancelado", "Operacion cancelada", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            ContenedorClientes encontrados = preguntarCliente.buscarPorAtributo(listaClientes, eleccion);
+            if(encontrados == null || encontrados.estaVacia()){
+                JOptionPane.showMessageDialog(frame, "No existen clientes que correspondan con los criterios de busqueda seleccionados\n\nIntentelo de nuevo\n\n",
+                                                     "Busqueda fallida", JOptionPane.ERROR_MESSAGE);
+                preguntarCliente(frame, listaClientes, archivador);
+            }else{
+                elegirCliente = new SeleccionarCliente(frame, encontrados); //JDialog para elegir a cliente
+                String codigoCliente = elegirCliente.getCodigoCliente();
+                cliente = listaClientes.buscarPorCodigo(codigoCliente);
+            }
+        }
+    }
+    
+    public void preguntarTickets(JFrame frame, ContenedorClientes listaClientes, ContenedorTickets archivador, ContenedorFacturas archivadorFacturas)
+    {
+        ContenedorTickets ticketsLimitados = archivador.buscarTicket(cliente.getCodigo(), anyoFiscal); // Se utilizará para guardar los tickets correspondientes a un cliente y aun año fiscal
+        if(ticketsLimitados == null){
+            //No exiten tickets para este cliente en el año fiscal introducido. Preguntamos de nuevo por el año fiscal
+            JOptionPane.showMessageDialog(frame,"No existen ventas realizas al Cliente:\n\n \tNombre: "+cliente.getNombre()+"\n \tCódigo "+cliente.getCodigo()+"\n\nen el año "+
+                                                "fiscal "+anyoFiscal, "Operacion cancelada", JOptionPane.INFORMATION_MESSAGE);
+            preguntarAnyoFiscal(frame, listaClientes, archivador, archivadorFacturas);
+        }else{
+            elegirTicket = new SeleccionarTicket(frame, ticketsLimitados);   //JDialog para seleccionar los tickets
+            if(elegirTicket.getTicketsSeleccionados() == null){
+                //Se ha cancelado o cerrado el JDialog. Se vuelve al paso anterior (pedir el año fiscal)
+                preguntarAnyoFiscal(frame, listaClientes, archivador, archivadorFacturas);
+            }else{
+                Factura factura = new Factura(elegirTicket.getTicketsSeleccionados(), cliente);
+                archivadorFacturas.insertarFactura(factura);
+                JOptionPane.showMessageDialog(frame,"La factura se ha creado correctamente\n\n", "Operación Aceptada", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+    
+    public void realizarFactura(JFrame frame, ContenedorClientes listaClientes, ContenedorTickets archivador, ContenedorFacturas archivadorFacturas)
+    {
+        preguntarCliente(frame, listaClientes, archivador);
+        if(cliente == null){
+            //No se ha llegado a seleccionar ningun cliente, se cancela la factura
+        }else{
+            preguntarAnyoFiscal(frame, listaClientes, archivador, archivadorFacturas);
+        }
+    }
+}

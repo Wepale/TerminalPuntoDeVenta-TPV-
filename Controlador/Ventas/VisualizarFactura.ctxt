@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.params=frame
+comment0.target=java.lang.String\ preguntarPorAtributo(javax.swing.JFrame)
+comment0.text=\r\n\ Este\ m\u00E9todo\ preguntar\u00E1\ al\ usuario\ como\ quiere\ buscar\ la\ factura\ que\ desea\ visualizar.\r\n\ Las\ opciones\ ser\u00E1n\:\ Visualizar\ todas\ las\ facturas,\ por\ codigo\ de\ la\ factura,\ por\ el\ c\u00F3digo\ del\ cliente\ o\ por\ el\r\n\ nombre\ del\ cliente\r\n\ \r\n\ @param\ frame\ El\ frame\ padre\r\n\ \r\n\ @return\ \ la\ opcion\ seleccionada\r\n
+comment1.params=frame\ listaClientes\ archivador\ seleccion
+comment1.target=Modelo.Contenedores.ContenedorFacturas\ buscarPorAtributo(javax.swing.JFrame,\ Modelo.Contenedores.ContenedorClientes,\ Modelo.Contenedores.ContenedorFacturas,\ java.lang.String)
+comment1.text=\r\n\ Nos\ permite\ encontrar\ aquellas\ facturas\ que\ concuerden\ con\ los\ datos\ introducidos\ por\ el\ usuario\ y\ el\ atributo\ seleccionado\r\n\ \r\n\ @param\ \ \ frame\ \ \ \ \ \ \ \ \ \ \ El\ frame\ padre\r\n\ @param\ \ \ litaClientes\ \ \ \ Los\ clientes\ dados\ de\ alta\ en\ el\ sistema\r\n\ @param\ \ \ archivador\ \ \ \ \ \ El\ objeto\ ContendorFacturas\ donde\ estar\u00E1n\ contenidas\ todas\ la\ facturas\r\n\ @param\ \ \ seleccion\ \ \ \ \ \ \ El\ atributo\ en\ el\ que\ queremos\ buscar\ coincidencias\r\n\ \r\n\ @return\ \ ContendorTickets\ \ \ Todos\ los\ tickets\ que\ concuerden\ con\ los\ datos\ introducidos\ por\ el\ usuario\r\n
+comment2.params=frame\ listaClientes\ archivador\ panel
+comment2.target=void\ imprimirResultados(javax.swing.JFrame,\ Modelo.Contenedores.ContenedorClientes,\ Modelo.Contenedores.ContenedorFacturas,\ javax.swing.JPanel)
+comment2.text=\r\n\ Pregunta\ al\ usuario\ por\ que\ atributo\ desea\ buscar\ coincidencias\ en\ los\ productos\ y\ los\ muestra\ por\ pantalla\r\n\ \ \r\n\ @param\ \ \ frame\ \ \ \ \ \ \ \ \ \ \ El\ JFrame\ padre\r\n\ @param\ \ \ litaClientes\ \ \ \ Los\ clientes\ dados\ de\ alta\ en\ el\ sistema\r\n\ @param\ \ \ archivador\ \ \ \ \ \ Contiene\ todos\ los\ tickets\ almacenados\ en\ el\ sistema\r\n\ @param\ \ \ panel\ \ \ \ \ \ \ \ \ \ \ El\ JPanel\ donde\ se\ mostrar\u00E1n\ los\ tickets\r\n
+comment3.params=panel\ facturasAImprimir
+comment3.target=void\ imprimirFacturas(javax.swing.JPanel,\ Modelo.Contenedores.ContenedorFacturas)
+comment3.text=\r\n\ Est\u00E9\ metodo\ mostrar\u00E1\ las\ facturas\ por\ pantalla\r\n\ \r\n\ La\ informaci\u00F3n\ que\ se\ mostrar\u00E1\ sera\:\r\n\ \r\n\ \ \ \ \ \ \ \ \ \ La\ informaci\u00F3n\ del\ vendedor,\ junto\ con\ el\ c\u00F3digo\ \u00FAnico\ de\ la\ factura\ y\ la\ fecha\r\n\ \ \ \ \ \ \ \ \ \ La\ informaci\u00F3n\ del\ cliente\r\n\ \ \ \ \ \ \ \ \ \ Los\ productos\ ordenados\ por\ tickets\r\n\ \r\n\ @param\ panel\ el\ panel\ donde\ se\ mostrar\u00E1\ el\ ticket\r\n\ @param\ facturasAImprimir\ todas\ las\ facturas\ que\ se\ desean\ mostrar\r\n
+comment4.params=panel\ cliente
+comment4.target=void\ imprimirCliente(javax.swing.JPanel,\ Modelo.Clientes.Cliente)
+comment4.text=\r\n\ Introducir\u00E1\ los\ datos\ del\ cliente\ (exepto\ la\ fecha\ de\ alta)\ en\ un\ JPanel\r\n\ \r\n\ @param\ panel\ el\ JPanel\ donde\ se\ introduciran\ los\ datos\ del\ cliente\r\n\ @param\ cliente\ el\ cliente\ el\ cual\ se\ introduciran\ sus\ datos\r\n
+comment5.params=panel\ factura
+comment5.target=void\ imprimirVendedor(javax.swing.JPanel,\ Modelo.Ventas.Factura)
+comment5.text=\r\n\ Introducir\u00E1\ los\ datos\ del\ vendedor,\ la\ fecha\ y\ n\u00BA\ de\ la\ factura\ en\ un\ JPanel\r\n\ \r\n\ @param\ panel\ el\ JPabnel\ donde\ se\ introduciran\ los\ datos\r\n\ @param\ factura\ la\ factura\ la\ cual\ se\ mostrar\u00E1n\ sus\ datos\r\n
+comment6.params=panel\ archivador
+comment6.target=void\ imprimirContenidoFactura(javax.swing.JPanel,\ Modelo.Contenedores.ContenedorTickets)
+comment6.text=\r\n\ Imprimir\u00E1\ los\ productos\ y\ el\ numero\ de\ ticket\ al\ que\ pertenecen\r\n\ \r\n\ @param\ panel\ el\ JPanel\ donde\ se\ visualizar\u00E1\ dicha\ informaci\u00F3n\r\n\ @param\ archivador\ los\ tickets\ incluidos\ en\ la\ factura\r\n
+comment7.params=panel
+comment7.target=void\ imprimirPrecioTotal(javax.swing.JPanel)
+comment7.text=\r\n\ Imprimir\u00E1\ el\ valor\ total\ de\ la\ factura\ y\ lo\ mostrar\u00E1\ en\ un\ JPanel\r\n\ \r\n\ @param\ panel\ el\ JPanel\ en\ el\ que\ se\ encontrar\u00E1n\r\n
+numComments=8

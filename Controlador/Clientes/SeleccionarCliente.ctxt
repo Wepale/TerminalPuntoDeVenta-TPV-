@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.params=frame\ lista
+comment0.target=SeleccionarCliente(javax.swing.JFrame,\ Modelo.Contenedores.ContenedorClientes)
+comment0.text=\r\n\ Crea\ el\ JDialog\ completamente\ funcional\ con\ todo\ lo\ necesario\ para\ que\ le\ usuario\ pueda\ seleccionar\ un\ producto\r\n\ \r\n\ @param\ frame\ el\ frame\ padre\r\n\ @param\ contenedor\ los\ productos\ a\ seleccionar\r\n
+comment1.params=
+comment1.target=java.lang.String\ getCodigoCliente()
+comment1.text=\r\n\ Devulve\ la\ variable\ de\ instancia\ codigoCliente\r\n\ \r\n\ @return\ \ codigoCliente\ el\ c\u00F3digo\ del\ cliente\ seleccionado,\ null\ si\ se\ ha\ cancelado\ la\ seleccion\r\n
+comment2.params=lista
+comment2.target=void\ crearOpciones(Modelo.Contenedores.ContenedorClientes)
+comment2.text=\r\n\ Por\ cada\ cliente\ que\ haya\ en\ el\ objeto\ ContenedorClientes\ que\ pasamos\ como\ parametro\ crear\u00E1\ un\ JRadioButton\ \r\n\ y\ lo\ introducira\ en\ la\ variable\ de\ inatancia\ panelOpciones\r\n\ \r\n\ @param\ \ \ lista\ \ \ El\ objeto\ tipo\ ContenedorClientes\ donde\ estar\u00E1n\ contenidos\ los\ clientes\ que\ se\ desean\ seleccionar\r\n
+comment3.params=
+comment3.target=java.lang.String\ comprobarEleccion()
+comment3.text=\r\n\ Comprueba\ que\ bot\u00F3n\ ha\ selecionado\ el\ usuario\ y\ devuelve\ el\ codigo\ del\ cliente\ asociado\r\n\ \r\n\ @return\ \ String\ el\ codig\ del\ producto\ que\ se\ ha\ seleccionado\r\n
+comment4.params=
+comment4.target=void\ control()
+comment4.text=\r\n\ Crear\ dos\ botones\ y\ los\ introduce\ un\ un\ JPanel\ con\ FlowLayout.\ Se\ usar\u00E1\ para\ validar\ la\ opcione\ escogida\r\n\ por\ el\ usuario\r\n
+comment5.params=e
+comment5.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment6.params=e
+comment6.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=7

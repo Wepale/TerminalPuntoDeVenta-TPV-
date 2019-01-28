@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=
+comment0.target=InformacionTicket()
+comment0.text=\r\n\ Constructor.\ Crea\ una\ nueva\ instancia\ de\ InformacionTicket.\ La\ acci\u00F3n\ de\ est\u00E1\ clase\ recaer\u00E1\ en\ el\ metodo\ "actualizarTicket(Jpanel,ContenedorProductos)"\r\n\ el\ cual\ cada\ vez\ que\ sea\ ejecutado\ mostrar\u00E1\ en\ el\ JPanel\ la\ informaci\u00F3n\ de\ cada\ producto\ contenido\ en\ ContendorProductos\r\n
+comment1.params=panel\ contenedor
+comment1.target=void\ actualizarTicket(javax.swing.JPanel,\ Modelo.Contenedores.ContenedorProductos)
+comment1.text=\r\n\ Est\u00E9\ m\u00E9todo\ mostrar\u00E1\ en\ un\ JPanel\ la\ informaci\u00F3n\ de\ los\ productos\ perfectamente\ ordenada\r\n\ \r\n\ @param\ panel\ El\ panel\ donde\ se\ mostrar\u00E1\ la\ inforamacion\r\n\ @param\ contenedor\ Los\ productos\ que\ se\ van\ a\ mostrar\r\n
+comment2.params=panel\ contenedor
+comment2.target=void\ ordenar(javax.swing.JPanel,\ Modelo.Contenedores.ContenedorProductos)
+comment2.text=\r\n\ Ordenar\u00E1\ los\ componentes\ que\ esten\ introducidos\ en\ el\ Jpanel.\r\n\ \r\n\ @param\ El\ JPanel\ a\ ordenar\r\n\ @param\ contenedor\ El\ mismo\ contenedor\ que\ incluya\ los\ mismos\ productos\ que\ se\ hayan\ utilizado\ para\ rellenar\ el\ JPanel\r\n
+numComments=3

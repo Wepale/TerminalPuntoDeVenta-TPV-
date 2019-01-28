@@ -1,0 +1,405 @@
+package Controlador.Ventas;
+
+import Modelo.Clientes.Cliente;
+import Modelo.Contenedores.*;
+import Modelo.Productos.*;
+import Modelo.Ventas.Ticket;
+import Controlador.Productos.SeleccionarProducto;
+import Controlador.Clientes.SeleccionarCliente;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+
+/**
+ * Write a description of class NuevoTicket here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class NuevoTicket
+{
+    private final String OPCION_1 = "Buscar por Nombre";
+    private final String OPCION_2 = "Buscar por Código";
+    private final String OPCION_3 = "Añadir otro producto al ticket";
+    private final String OPCION_4 = "Finalizar la venta";
+    private final String OPCION_5 = "Cancelar y salir";
+    private final String N_OCASIONAL = "Cliente ocasional";
+    private final String C_OCASIONAL = "00000";
+    private final String OPCION_7 = "Mostrar todos los clientes";
+    private final String OPCION_8 = "Mostrar todo el inventario";
+    
+    private InformacionTicket mostrar;
+    private SeleccionarProducto elegirProducto;
+    private SeleccionarCliente elegirCliente;
+    
+    private ContenedorProductos productosTicket; 
+    private Cliente cliente;
+    
+    public NuevoTicket(JFrame frame, ContenedorProductos inventario, ContenedorClientes listaClientes, ContenedorTickets archivador, JPanel panel){
+        productosTicket = new ContenedorProductos();
+        mostrar = new InformacionTicket();
+        cliente = null;
+        realizarVenta(frame, inventario, listaClientes, archivador, panel);
+    }
+    
+    /**
+     * Este método preguntará al usuario por que atributo quiere buscar el producto que desea añadir al ticket. Las opciones serán por nombre, código o mostrar todos los pructos existentes en el inventario
+     * 
+     * @return  la opcion seleccionada
+     */
+    public String preguntarAtributoProducto(JFrame frame)
+    {
+        Object seleccion = JOptionPane.showInputDialog(
+        frame,
+        "La venta actual se está realizando a: "+cliente.getNombre()+"\n\n¿Que atributo desea usar para buscar el producto que desea vender?\n\n",
+        "Buscar Productos",
+        JOptionPane.QUESTION_MESSAGE,
+        null,  // null para icono defecto
+        new String[] { OPCION_1, OPCION_2, OPCION_8}, 
+        OPCION_1);
+        
+        return (String)seleccion;
+    }
+    
+    /**
+     * Este método pregunta al usuario el código del producto que desea añadir al ticket
+     * 
+     * @param inventario    El inventario con todos los productos
+     * @param archivador    El archivador donde el sistema guarda los tickets generados
+     */
+    
+    public void preguntarCodigo(JFrame frame, ContenedorProductos inventario, ContenedorTickets archivador, JPanel panel)
+    {
+        String seleccion = JOptionPane.showInputDialog(frame, "Introduzca el código del producto que desea introducir en el ticket\n\n", JOptionPane.QUESTION_MESSAGE);
+        if(seleccion == null){
+            //Se ha seleccionado cancelar o se ha cerrado el JOptionPane. Si no hay productos en el ticket, se cancela la venta, en caso contrario se pregunta al usuario el siguente paso
+            introducirProducto(frame, inventario, archivador, panel);
+        }else if(inventario.existeProducto(seleccion)){
+            ProductoBase producto = inventario.buscarCodigo(seleccion);
+            preguntarUnidadesAVender(frame, inventario, archivador, producto, panel);
+        }else{
+            JOptionPane.showMessageDialog(frame, "El código introducido no corresponde con ningun producto.\n\nIntentelo de Nuevo\n\n", "Producto no encontrado", JOptionPane.ERROR_MESSAGE);
+            preguntarCodigo(frame, inventario, archivador, panel);
+        }
+    }
+    
+    /**
+     * Este método pregunta al usuario el nombre del producto que desea añadir al ticket. Si existen varias coincidencias se le pedirá
+     * que seleccione el producto adecuado
+     * 
+     * @param inventario    El inventario con todos los productos
+     * @param archivador    El archivador donde el sistema guarda los tickets generados
+     */
+    public void preguntarNombre(JFrame frame, ContenedorProductos inventario, ContenedorTickets archivador, JPanel panel)
+    {
+        String seleccion = JOptionPane.showInputDialog(frame, "Introduzca el nombre, marca o modelo del producto que desea vender\n\n", JOptionPane.QUESTION_MESSAGE);
+        if(seleccion == null){
+            //Se ha seleccionado cancelar o se ha cerrado el JOptionPane. Si no hay productos en el ticket, se cancela la venta, en caso contrario se pregunta al usuario el siguente paso
+            introducirProducto(frame, inventario, archivador, panel);
+        }else if(inventario.existeNombre(seleccion)){
+            ContenedorProductos resultados = inventario.buscarNombre(seleccion);
+            if(resultados.getContenedor().size() == 1){ //Solo existe un producto con coincidencias, se preguntan las unidades a vender directamente
+                ProductoBase producto = resultados.getContenedor().get(0);  //Como solo hay uno, estará en la primera posición
+                preguntarUnidadesAVender(frame, inventario, archivador, producto, panel);
+            }else{  //Existe más de un producto con coincidencias, se le pedirá al usuario que eligá el que desee
+                verProductos(frame, inventario, archivador, resultados, panel);
+            }
+        }else{
+            JOptionPane.showMessageDialog(frame, "No se han encontrado coincidencias con el nombre/marca/modelo introducido.\n\nIntentelo de Nuevo\n\n", "Producto no encontrado", JOptionPane.ERROR_MESSAGE);
+            preguntarNombre(frame, inventario, archivador, panel);
+        }
+    }
+    
+    /**
+     * Esté metodo abre un JDialog para que el usuario seleccione uno de los productos que estén contenidos en el objeto ContenedorProductos que se le pasa como parámetro.
+     * 
+     * Se le preguntará directamente al usuario las unidades a vender del producto seleccionado
+     * 
+     * @param inventario    El inventario con todos los productos
+     * "param archivador    El archivador donde el sistema guarda los tickets generados
+     * @param contenedor    Los clientes que apareceran en el JDialog
+     */
+    public void verProductos(JFrame frame, ContenedorProductos inventario, ContenedorTickets archivador, ContenedorProductos contenedor, JPanel panel)
+    {
+       elegirProducto = new SeleccionarProducto(frame, contenedor);   //JDialog para que el usuario seleccione el producto
+       String codigo = elegirProducto.getCodigoProducto();
+       if(codigo == null){
+           //Se ha presionado cancelar o se ha cerreado el JDialog
+           introducirProducto(frame, inventario, archivador, panel);
+       }else{
+           preguntarUnidadesAVender(frame, inventario, archivador, inventario.buscarCodigo(codigo), panel);
+       }
+    }
+    
+    /**
+     * Este método pedirá al usuario que intruduzca las unidades a vender de un producto. Si no existe stock del producto, se introducen más unidades del stock
+     * disponible o se introduce un dato no valido, se mostrarán los errores oportunos.
+     * 
+     * @param inventario Nuestro inventario donde se encuentran todos los productos
+     * @param producto el producto a vender
+     */
+    
+    public void preguntarUnidadesAVender(JFrame frame, ContenedorProductos inventario, ContenedorTickets archivador, ProductoBase producto, JPanel panel)
+    {
+        String vender = JOptionPane.showInputDialog(frame, producto.getCodigo()+" "+producto.getNombre()+ "\nUnidades disponibles en stock: " +producto.getStock()+
+                                                    "\n\nIntroduzca la cantidad de unidades que desea vender\n\n", JOptionPane.QUESTION_MESSAGE);
+        double aVenderAux = 0;
+        boolean tryActivado = false;
+        if(vender == null){
+            //Se ha seleccionado cancelar o se ha cerrado la ventana, se pregunta de nuevo el producto que se desea añadir
+            introducirProducto(frame, inventario, archivador, panel);
+        }else{
+            try{
+                aVenderAux = Double.parseDouble(vender);
+            }catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(frame, "Debe introducir un número\n\nIntentelo de nuevo\n\n", "ERROR", JOptionPane.ERROR_MESSAGE);
+                preguntarUnidadesAVender(frame, inventario, archivador, producto, panel);
+                tryActivado = true;
+            }
+            if(tryActivado){
+                //A saltado la excepcion, no continuar
+            }else{
+                double aVender = aVenderAux;
+                double stock = producto.getStock();
+                if(aVender <= 0){
+                    JOptionPane.showMessageDialog(frame, "Debe introducir un numero mayor que 0.\n\nIntentelo de nuevo\n\n", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    preguntarUnidadesAVender(frame, inventario, archivador, producto, panel);
+                }else if(stock == 0){
+                    JOptionPane.showMessageDialog(frame, "Actualmente no existe stock para este producto en el inventario\n\n"+
+                                                    "En la siguiente pantalla seleccione otro producto o cancele la venta si así lo desea\n\n", "Fuera de Stock",
+                                                    JOptionPane.ERROR_MESSAGE);
+                    introducirProducto(frame, inventario, archivador, panel);
+                }else if(stock < aVender){
+                    JOptionPane.showMessageDialog(frame,"Stock insuficiente. Unidades en stock:"+stock+"\n\nIntetelo de nuevo con menos unidades\n\n", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    preguntarUnidadesAVender(frame, inventario, archivador, producto, panel);
+                }else{
+                    producto.modVendido(aVender);
+                    producto.modStock(-aVender);
+                    if(productosTicket.existeProducto(producto.getCodigo())){
+                        //Como el producto ya esta en la lista de productos del ticket y ya he actualizado las unidades
+                        //vendidas y el stock en el inventario no se hace nada
+                    }else{  //No está en el ticket, se introduce en él.
+                        productosTicket.insertarProducto(producto); 
+                    }
+                    mostrar.actualizarTicket(panel, productosTicket);
+                    JOptionPane.showMessageDialog(frame, "El producto se ha añadido correctamente al ticket\n\n", "Operación Aceptada", JOptionPane.INFORMATION_MESSAGE);
+                    preguntarAccion(frame, inventario, archivador, panel);
+                }
+            }
+        }
+    }
+    
+    /**
+     * Este método hará todo lo necesario para introducir un producto en el ticket. Preguntará como se quiere buscar el producto a introducir en el ticket, comprobará
+     * las unidades que se quieren vender con el stock disponible y finalmente añadirá el producto al ticket.
+     */
+    public void introducirProducto(JFrame frame, ContenedorProductos inventario, ContenedorTickets archivador, JPanel panel)
+    {
+        String seleccion = preguntarAtributoProducto(frame);
+        if(seleccion == null){  //Se ha presionado cancelar
+            comprobarCancelacion(frame, inventario, archivador, productosTicket, panel);
+        }else if(seleccion.equals(OPCION_1)){
+            preguntarNombre(frame, inventario, archivador, panel);
+        }else if(seleccion.equals(OPCION_2)){
+            preguntarCodigo(frame, inventario, archivador, panel);
+        }else{
+            verProductos(frame, inventario, archivador, inventario, panel);
+        }
+    }
+    
+    /**
+     * Despues de introducir un producto en el ticket, se le preguntará al usuario que desea hacer. 
+     * Las opciones serán: Añadir otro producto al ticket, cerrar el ticket y finalizar la venta o cancelar la venta
+     */
+    public void preguntarAccion(JFrame frame, ContenedorProductos inventario, ContenedorTickets archivador, JPanel panel)
+    {
+        int seleccion = JOptionPane.showOptionDialog(
+        frame,
+        "¿Que desea hacer a continuación?\n\n",
+        "Seleccione opcion", 
+        JOptionPane.YES_NO_CANCEL_OPTION,
+        JOptionPane.QUESTION_MESSAGE,
+        null,    // null para icono por defecto.
+        new Object[] { OPCION_3, OPCION_4, OPCION_5 },   // null para YES, NO y CANCEL
+        OPCION_1);
+        if(seleccion == 0){
+            introducirProducto(frame, inventario, archivador, panel);
+        }else if(seleccion == 1){
+            Ticket ticket = new Ticket(productosTicket, cliente);       //Se creá el ticket. Tanto los productos y el cliente seran nuevos objetos para evitar que posteriores cambios en el inventario o los clientes afecten al ticket
+            archivador.insertarTicket(ticket);
+            resetearVendido(productosTicket);
+            JOptionPane.showMessageDialog(frame, "La venta se ha realizado correctamente. El ticket con la información de la venta se ha añadido\n"+
+                                                "al archivador de tickets. Se ha modificado el stock de los productos vendidos\n", "Operación Aceptada", JOptionPane.INFORMATION_MESSAGE);
+            panel.removeAll();
+            panel.updateUI();
+            cliente = null;
+        }else{  //Se ha seleccionado cancelar venta o se ha cerrado el JOptionPane
+            JOptionPane.showMessageDialog(frame,"La venta ha sido cancelada", "Operación Cancelada", JOptionPane.ERROR_MESSAGE);
+            resetearStock(productosTicket);
+            resetearVendido(productosTicket);
+            panel.removeAll();
+            panel.updateUI();
+        }
+    }
+    
+    /**
+     * Esté metodo comprobará si el ticket contiene productos. Si el ticket está vacio, se le mostrará un mensaje al usuario informandole que la venta
+     * ha sido cancelada. En caso contrario, se le preguntará al usuario que se desea hacer a continuación
+     */
+    public void comprobarCancelacion(JFrame frame, ContenedorProductos inventario, ContenedorTickets archivador, ContenedorProductos productosTicket, JPanel panel)
+    {
+        if(productosTicket.estaVacio()){
+            //No existen productos en el ticket, se cancela la venta
+            JOptionPane.showMessageDialog(frame,"La venta ha sido cancelada", "Operación Cancelada", JOptionPane.ERROR_MESSAGE);
+        }else{
+            //Existen productos en el ticket, se pregunta que se desea hacer
+            preguntarAccion(frame, inventario, archivador, panel);
+        }
+    }
+    
+    /**
+     * Esté método restaurará el stock en el inventario de los productos que se hayan añadido al ticket.
+     * Se utilizará cuando la venta se cancele por algún motivo
+     * 
+     * @param productosAVender  los productos que están contenidos en el ticket
+     */
+    public void resetearStock(ContenedorProductos productosAVender)
+    {
+        for(ProductoBase producto : productosAVender.getContenedor()){
+            double vendido = producto.getVendido();
+            producto.modStock(vendido);
+        }
+    }
+    
+    /**
+     * Este método restaurá las unidades vendidas de un producto para dejarlas de nuevo a 0.
+     * Se utilizará cuando se confirme la venta o se cancele
+     */
+    public void resetearVendido(ContenedorProductos productosAVender)
+    {
+        for(ProductoBase producto : productosAVender.getContenedor()){
+            producto.setVendido(0);
+        }
+    }
+    /*
+     * Los métodos a continuación implementados se utilizarán para asociar el ticket a un cliente almacenado en nuestro sistema
+     */
+
+    /**
+     * Este método preguntará al usuario por que atributo quiere buscar al cliente al que se le realizará la venta. Las opciones serán por nombre o código.
+     * El sistema támbien permitirá la opcion de realizar la venta a un cliente ocasional, el cual no existe en nuestro sistema
+     * 
+     * @return  la opcion seleccionada
+     */
+    public String preguntarAtributoCliente(JFrame frame)
+    {
+        Object seleccion = JOptionPane.showInputDialog(
+                                        frame,
+                                        "Por seleccione, seleccione como desea seleccionar al cliente al que se le realizará la venta.\n\n",
+                                        "Seleccione cliente",
+                                        JOptionPane.QUESTION_MESSAGE,
+                                        null,  // null para icono defecto
+                                        new String[] { OPCION_1, OPCION_2, OPCION_7, N_OCASIONAL }, 
+                                        OPCION_1);
+        return (String)seleccion;
+    }
+    
+    /**
+     * Este método pregunta al usuario el código del cliente al que se le quiere realizar la venta
+     * 
+     * @param listaClientes Los clientes que existen en el sistema
+     */
+    
+    public void preguntarCodigo(JFrame frame, ContenedorProductos inventario, ContenedorClientes listaClientes, ContenedorTickets archivador, JPanel panel)
+    {
+        String seleccion = JOptionPane.showInputDialog(frame, "Introduzca el código del cliente al que se le realizará la venta\n\n", JOptionPane.QUESTION_MESSAGE);
+        if(seleccion == null){
+            //Se ha seleccionado cancelar, no hacer nada
+            realizarVenta(frame, inventario, listaClientes, archivador, panel);
+        }else if(listaClientes.existeCliente(seleccion)){
+            cliente = listaClientes.buscarPorCodigo(seleccion);
+        }else{
+            JOptionPane.showMessageDialog(frame, "El código introducido no corresponde con ningún cliente.\n\nIntentelo de nuevo\n\n", "Cliente no encontrado", JOptionPane.ERROR_MESSAGE);
+            preguntarCodigo(frame, inventario, listaClientes, archivador, panel);
+        }
+    }
+    
+    /**
+     * Este método pregunta al usuario el nombre del cliente al que se le desea realizar la venta. Si existen varias coincidencias se le pedirá
+     * que seleccione el cliente adecuado
+     * 
+     * @param listaClientes    Los clientes que existen en el sistema
+     */
+    public void preguntarNombre(JFrame frame, ContenedorProductos inventario, ContenedorClientes listaClientes, ContenedorTickets archivador, JPanel panel)
+    {
+        String seleccion = JOptionPane.showInputDialog(frame, "Introduzca el Nombre/Razon Social del cliente al que se le realizará la venta\n\n", JOptionPane.QUESTION_MESSAGE);
+        if(seleccion == null){
+            //se ha presionado cancelar, no hacer nada
+            realizarVenta(frame, inventario, listaClientes, archivador, panel);
+        }else if(listaClientes.existeNombre(seleccion)){
+            ContenedorClientes resultados = listaClientes.buscarPorNombre(seleccion);
+            if(resultados.getListaClientes().size() == 1){ //Solo existe un cliente con coincidencias
+                cliente = resultados.getListaClientes().get(0);
+            }else{  //Existe más de un cliente con coincidencias, se le pedirá al usuario que eligá el que desee
+                verClientes(frame, inventario, listaClientes, archivador, resultados, panel);
+            }
+        }else{
+            JOptionPane.showMessageDialog(frame, "No se han encontrado coincidencias con el Nombre/Razon Social introducido.\n\nIntentelo de nuevo\n\n", "Cliente no encontrado", JOptionPane.ERROR_MESSAGE);
+            preguntarNombre(frame, inventario, listaClientes, archivador, panel);
+        }
+    }
+    
+    /**
+     * Esté metodo abre un JDialog para que el usuario seleccione uno de los clientes que estén contenidos en el objeto ContenedorClientes que se le pasa como parametro.
+     * 
+     * El cliente seleccionado se guardará en la variable de instancia "cliente".
+     * 
+     * @param listaClientes Los clientes que apareceran en el JDialog
+     */
+    public void verClientes(JFrame frame, ContenedorProductos inventario, ContenedorClientes listaClientes, ContenedorTickets archivador, ContenedorClientes otraListaClientes, JPanel panel)
+    {
+        elegirCliente = new SeleccionarCliente(frame, otraListaClientes); //JDialog
+        String codigo = elegirCliente.getCodigoCliente();
+        if (codigo == null){
+            //Se ha presionado cancelar o se ha cerrado el JDialog, no hacer nada
+            realizarVenta(frame, inventario, listaClientes, archivador, panel);
+        }else{
+            cliente = otraListaClientes.buscarPorCodigo(codigo);
+        }
+    }
+    
+    /**
+     * Este método hará todo lo necesario para realizar una venta. Primero preguntará el cliente al que se le realizará la venta, posteriormente se seleccionarán
+     * los productos que se venderán y cuando se confirme la venta el ticket será introducido al archivador de tickets y se modificará el stock de los productos
+     * vendidos.
+     * 
+     * @param   inventerio      El inventario con todos los productos
+     * @param   listaClientes   Todos los clientes que existen en el sistema 
+     * @param   archivador      El archivador que contiene todos los tickets que existen en el sistema
+     */
+    public void realizarVenta(JFrame frame, ContenedorProductos inventario, ContenedorClientes listaClientes, ContenedorTickets archivador, JPanel panel)
+    {
+        String seleccion = preguntarAtributoCliente(frame);
+        if(seleccion == null){
+            //Se ha precionado cancelar, no hacer nada
+            JOptionPane.showMessageDialog(frame,"No se ha seleccionado ningun cliente.\n\nLa venta ha sido cancelada\n\n", "Operación Cancelada", JOptionPane.ERROR_MESSAGE);
+        }else if(seleccion.equals(OPCION_1)){
+            preguntarNombre(frame, inventario, listaClientes, archivador, panel);
+        }else if(seleccion.equals(OPCION_2)){
+            preguntarCodigo(frame, inventario, listaClientes, archivador, panel);
+        }else if(seleccion.equals(OPCION_7)){
+            verClientes(frame, inventario, listaClientes, archivador, listaClientes, panel);
+        }else{
+            cliente = listaClientes.buscarPorCodigo(C_OCASIONAL);
+        }
+        if(cliente == null){
+            //No se ha seleccionado ningun cliente por que se ha cancelado. No hacer nada
+        }else{
+            introducirProducto(frame, inventario, archivador, panel);
+        }
+        }
+    }
+}
+

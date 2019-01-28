@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.params=frame\ archivadorLimitado
+comment0.target=SeleccionarTicket(javax.swing.JFrame,\ Modelo.Contenedores.ContenedorTickets)
+comment1.params=
+comment1.target=Modelo.Contenedores.ContenedorTickets\ getTicketsSeleccionados()
+comment1.text=\r\n\ Da\ acceso\ a\ los\ tickets\ que\ se\ han\ seleccionados\r\n\ \r\n\ @return\ ContenedorTickets\ con\ los\ tickets\ selecionados,\ null\ si\ se\ ha\ cerrado\ el\ JDialog\r\n
+comment2.params=archivadorLimitado
+comment2.target=void\ crearOpciones(Modelo.Contenedores.ContenedorTickets)
+comment2.text=\r\n\ Por\ cada\ ticket\ que\ haya\ en\ el\ objeto\ ContenedorTickets\ que\ pasamos\ como\ parametro\ crear\u00E1\ un\ JCheckBox\ para\ poder\ seleccionarlo\r\n\ y\ lo\ introducira\ en\ un\ JPanel\r\n\ \r\n\ @param\ \ \ archivadorLimitado\ \ \ los\ posibles\ tickets\ que\ se\ pueden\ introducir\ en\ la\ factura.\r\n
+comment3.params=actionEvent
+comment3.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment4.params=archivadorLimitado
+comment4.target=Modelo.Contenedores.ContenedorTickets\ comprobarEleccion(Modelo.Contenedores.ContenedorTickets)
+comment4.text=\r\n\ Comprueba\ que\ JCheckBox\ se\ han\ selecionados\ el\ usuario\ y\ devuelve\ un\ objeto\ ContendorTickets\ con\ los\ tickets\ seleccionados\r\n\ \r\n\ @param\ archivadorLimitado\ los\ posibles\ tickets\ que\ se\ pueden\ introducir\ en\ la\ factura.\ Deber\u00E1n\ de\ ser\ los\ mismo\ tickets\ que\ se\ usaron\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ en\ el\ m\u00E9todo\ crearOpciones(ContenedorTickets),\ es\ decir,\ aquellos\ para\ los\ que\ se\ crearon\ los\ JCheckBox\r\n\ \r\n\ @return\ \ ContenedorTickets\ con\ los\ tickets\ seleccionados\r\n\ \r\n
+comment5.params=archivadorLimitado
+comment5.target=void\ control(Modelo.Contenedores.ContenedorTickets)
+comment5.text=\r\n\ Crear\ dos\ botones\ y\ los\ introduce\ un\ un\ JPanel\ con\ FlowLayout.\ Se\ usar\u00E1\ cuando\ el\ usuario\ haya\ decidio\ que\ tickets\ quiere\ facturar.\r\n\ El\ bot\u00F3n\ "Aceptar"\ comprobar\u00E1\ que\ JCkeckBox\ estan\ seleccionados\ y\ el\ bot\u00F3n\ "Cancelar"\ cerrar\u00E1\ el\ JDialog\r\n\ \r\n\ @param\ archivadorLimitado\ los\ posibles\ tickets\ que\ se\ pueden\ introducir\ en\ la\ factura.\ Deber\u00E1n\ de\ ser\ los\ mismo\ tickets\ que\ se\ usaron\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ en\ el\ m\u00E9todo\ crearOpciones(ContenedorTickets),\ es\ decir,\ aquellos\ para\ los\ que\ se\ crearon\ los\ JCheckBox\r\n
+comment6.params=e
+comment6.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment7.params=e
+comment7.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=8

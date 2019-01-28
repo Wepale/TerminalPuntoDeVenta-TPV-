@@ -1,0 +1,311 @@
+package Controlador.Ventas;
+
+import Modelo.Contenedores.ContenedorFacturas;
+import Modelo.Contenedores.ContenedorTickets;
+import Modelo.Contenedores.ContenedorProductos;
+import Modelo.Contenedores.ContenedorClientes;
+
+import Modelo.Clientes.Cliente;
+import Modelo.Ventas.Ticket;
+import Modelo.Ventas.Factura;
+
+import Controlador.Clientes.BuscarUnCliente;
+
+import Controlador.UtilidadesSpring;
+
+import java.awt.*;
+import javax.swing.*;
+/**
+ * Permitirá buscar facturas en el archivador de facturas y visualizarlas en pantalla.
+ * 
+ * Se podrán buscar facturas por su código, facturas asociadas a un cliente en particular o mostrar todas las facturas.
+ * 
+ * @author Yeray Rodríguez Martín 
+ * @version 1.0
+ */
+public class VisualizarFactura
+{
+    private double totalFactura;
+    private InformacionTicket ayuda = new InformacionTicket();
+    
+    private final String OPCION_1 = "Mostrar todas las facturas";
+    private final String OPCION_2 = "Buscar factura por código";
+    private final String OPCION_3 = "Buscar facturas por cliente";
+    private final Color COLOR_1 = Color.cyan.darker();
+    private final Color COLOR_2 = Color.red.darker();
+    
+    
+    /**
+     * Este método preguntará al usuario como quiere buscar la factura que desea visualizar.
+     * Las opciones serán: Visualizar todas las facturas, por codigo de la factura, por el código del cliente o por el
+     * nombre del cliente
+     * 
+     * @param frame El frame padre
+     * 
+     * @return  la opcion seleccionada
+     */
+    public String preguntarPorAtributo(JFrame frame)
+    {
+        Object seleccion = JOptionPane.showInputDialog(
+        frame,
+        "¿Como desea buscar la factura que quiere visualizar?\n",
+        "Ver Ticket",
+        JOptionPane.QUESTION_MESSAGE,
+        null,  // null para icono defecto
+        new String[] { OPCION_1, OPCION_2, OPCION_3 }, 
+        OPCION_1);
+        
+        return (String)seleccion;
+    }
+    
+    /**
+     * Nos permite encontrar aquellas facturas que concuerden con los datos introducidos por el usuario y el atributo seleccionado
+     * 
+     * @param   frame           El frame padre
+     * @param   litaClientes    Los clientes dados de alta en el sistema
+     * @param   archivador      El objeto ContendorFacturas donde estarán contenidas todas la facturas
+     * @param   seleccion       El atributo en el que queremos buscar coincidencias
+     * 
+     * @return  ContendorTickets   Todos los tickets que concuerden con los datos introducidos por el usuario
+     */
+    public ContenedorFacturas buscarPorAtributo(JFrame frame, ContenedorClientes listaClientes, ContenedorFacturas archivador, String seleccion)
+    { 
+        ContenedorFacturas resultados = new ContenedorFacturas();
+        if(seleccion.equals(OPCION_2)){
+            String eleccion = JOptionPane.showInputDialog(frame, "Introduzca el código de la factura que desea visualizar\n", JOptionPane.QUESTION_MESSAGE);
+            if(eleccion == null){
+                //Se ha presionado cancelar o se ha cerrado el JOptionPane. No hacer nada
+                return resultados;  
+            }else{
+                if(archivador.existeFactura(eleccion)){
+                    resultados.insertarFactura(archivador.buscarPorCodigo(eleccion));
+                    return resultados;
+                }else{
+                    return null;    //No se ha encontrado nada
+                }
+            }   
+        }else if(seleccion.equals(OPCION_3)){
+            BuscarUnCliente preguntarCliente = new BuscarUnCliente();
+            preguntarCliente.preguntarPorCliente(frame, listaClientes);
+            if(preguntarCliente.getCliente() == null){
+                //No se ha seleccionado a ningún cliente
+                return resultados;
+            }else{
+                String codigoCliente = preguntarCliente.getCliente().getCodigo();
+                return archivador.buscarPorCodigoCliente(codigoCliente);
+            }
+        }else{
+            if(archivador.estaVacio()){
+                JOptionPane.showMessageDialog(frame, "No existen facturas en el sistema.\n\n","Busqueda fallida", JOptionPane.INFORMATION_MESSAGE);
+            }
+            return archivador;
+        }
+    }
+    
+    /**
+     * Pregunta al usuario por que atributo desea buscar coincidencias en los productos y los muestra por pantalla
+     *  
+     * @param   frame           El JFrame padre
+     * @param   litaClientes    Los clientes dados de alta en el sistema
+     * @param   archivador      Contiene todos los tickets almacenados en el sistema
+     * @param   panel           El JPanel donde se mostrarán los tickets
+     */
+    public void imprimirResultados(JFrame frame, ContenedorClientes listaClientes, ContenedorFacturas archivador, JPanel panel)
+    {
+        String eleccion = preguntarPorAtributo(frame);
+        if(eleccion == null){
+            //Se ha presionado cancelar, no hacer nada
+        }else{
+            ContenedorFacturas encontrados = buscarPorAtributo(frame, listaClientes, archivador, eleccion);
+            if(encontrados == null){    //No se han entcontrado coincidencias
+                JOptionPane.showMessageDialog(frame, "No existen tickets en el archivador que correspondan \n con los criterios de busqueda seleccionados\n",
+                                                        "Busqueda fallida", JOptionPane.ERROR_MESSAGE);
+                                                        
+            }else if(encontrados.estaVacio()){      //Se ha cancelado la introduccion de datos antes de tiempo
+                //No hacer nada
+            }else{
+                imprimirFacturas(panel, encontrados);
+            }
+        }
+    }
+    
+    /**
+     * Esté metodo mostrará las facturas por pantalla
+     * 
+     * La información que se mostrará sera:
+     * 
+     *          La información del vendedor, junto con el código único de la factura y la fecha
+     *          La información del cliente
+     *          Los productos ordenados por tickets
+     * 
+     * @param panel el panel donde se mostrará el ticket
+     * @param facturasAImprimir todas las facturas que se desean mostrar
+     */
+    public void imprimirFacturas(JPanel panel, ContenedorFacturas facturasAImprimir)
+    {
+        panel.removeAll();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        
+        for(Factura factura : facturasAImprimir.getArchivador()){
+            JPanel panelFactura;                //Contendrá la información del la factura(código, nif vendedor, fecha...)
+            JPanel panelCliente;                //Contendrá la información del cliente
+            JPanel panelInformacion;            //Contendrá a los dos paneles anteriores y su usará para ser la cabera de cada factura
+            JPanel panelContenidoFactura;       //Contendrá los dos paneles anteriores
+            JPanel panelPrecioTotal;            //Contendrá el precio total de la factura
+            
+            //Iniclializamos los paneles con sus respectivos gestores de disposición
+            panelFactura = new JPanel();
+            panelFactura.setLayout(new BoxLayout(panelFactura, BoxLayout.Y_AXIS));
+            
+            panelCliente = new JPanel();
+            panelCliente.setLayout(new BoxLayout(panelCliente, BoxLayout.Y_AXIS));
+            
+            panelInformacion = new JPanel(new FlowLayout(FlowLayout.CENTER, 200,1));            
+            
+            panelContenidoFactura = new JPanel();
+            panelContenidoFactura.setLayout(new BoxLayout(panelContenidoFactura, BoxLayout.Y_AXIS));
+            
+            panelPrecioTotal = new JPanel(new SpringLayout());
+
+            //Añadimos a los paneles correspondientes los datos del vendedor y del cliente
+            imprimirCliente(panelCliente, factura.getCliente());
+            imprimirVendedor(panelFactura, factura);
+            panelInformacion.add(panelFactura);
+            panelInformacion.add(panelCliente);
+            
+            //Hacemos que el tamaño del panel información sea siempre el mismo
+            double alto = panelInformacion.getMaximumSize().getHeight();
+            double ancho = panelInformacion.getMaximumSize().getWidth();
+            panelInformacion.setMaximumSize(new Dimension((int)ancho, 100));
+            panelInformacion.setMinimumSize(new Dimension((int)ancho, 100));
+            
+
+            //Creamos el contenido de la factura, los productos y los tickets a los que pertenecen
+            imprimirContenidoFactura(panelContenidoFactura, factura.getTickets());
+            
+            //Creamos el precio total de la factura
+            imprimirPrecioTotal(panelPrecioTotal);
+            
+            //Añadimos todo al panel
+            panel.add(panelInformacion);
+            panel.add(panelContenidoFactura);
+            panel.add(panelPrecioTotal);
+            
+            //Añadimos un RigidArea para que haya un espacio entre las facturas si mostramos varias
+            panel.add(Box.createRigidArea(new Dimension(0,70)));
+        }
+        panel.updateUI();
+    }
+    
+    /**
+     * Introducirá los datos del cliente (exepto la fecha de alta) en un JPanel
+     * 
+     * @param panel el JPanel donde se introduciran los datos del cliente
+     * @param cliente el cliente el cual se introduciran sus datos
+     */
+    public void imprimirCliente(JPanel panel, Cliente cliente)
+    {
+        String codigo = cliente.getCodigo();
+        String nombre = cliente.getNombre();
+        String nif = cliente.getNif();
+        String domicilio = cliente.getDomicilio();
+        
+        JLabel jCodigo = new JLabel("Nº Cliente: "+codigo);
+        JLabel jNombre = new JLabel("Nombre: "+nombre);
+        JLabel jNif = new JLabel("NIF: "+nif);
+        JLabel jDomicilio = new JLabel("Domicilio: "+domicilio);
+        
+        jCodigo.setForeground(COLOR_1);
+        jNombre.setForeground(COLOR_1);
+        jNif.setForeground(COLOR_1);
+        jDomicilio.setForeground(COLOR_1);
+        
+        panel.add(jCodigo);
+        panel.add(jNombre);
+        panel.add(jNif);
+        panel.add(jDomicilio);
+    }
+    
+    /**
+     * Introducirá los datos del vendedor, la fecha y nº de la factura en un JPanel
+     * 
+     * @param panel el JPabnel donde se introduciran los datos
+     * @param factura la factura la cual se mostrarán sus datos
+     */
+    public void imprimirVendedor(JPanel panel, Factura factura)
+    {
+        String razonSocial = Factura.getRazonSocial();
+        String cif = Factura.getCif();
+        String codigo = factura.getFecha(Factura.CODIGO);
+        String fecha = factura.getFecha(Factura.FECHA);
+        
+        JLabel jRazonSocial = new JLabel(razonSocial);
+        JLabel jCif = new JLabel("CIF: "+cif);
+        JLabel jCodigo = new JLabel("Nº factura: "+codigo);
+        JLabel jFecha = new JLabel("Fecha: "+fecha);
+        
+        
+        jRazonSocial.setForeground(COLOR_1);
+        jCif.setForeground(COLOR_1);
+        jCodigo.setForeground(COLOR_1);
+        jFecha.setForeground(COLOR_1);
+        
+        panel.add(jRazonSocial);
+        panel.add(jCif);
+        panel.add(jCodigo);
+        panel.add(jFecha);
+    }
+    
+    /**
+     * Imprimirá los productos y el numero de ticket al que pertenecen
+     * 
+     * @param panel el JPanel donde se visualizará dicha información
+     * @param archivador los tickets incluidos en la factura
+     */
+    public void imprimirContenidoFactura(JPanel panel, ContenedorTickets archivador)
+    {
+        for(Ticket ticket : archivador.getArchivador()){
+             String codigo = ticket.getFecha(Ticket.CODIGO);
+             JLabel jCodigo = new JLabel("Nº Ticket: "+codigo);
+             JPanel panelNumTicket = new JPanel(new FlowLayout());
+             
+             //Hacemos que este panel siempre tenga el mismo tamaño
+             double ancho = panelNumTicket.getMaximumSize().getWidth();
+             double alto = panelNumTicket.getMaximumSize().getHeight();
+             panelNumTicket.setMaximumSize(new Dimension((int)ancho, 50));
+             panelNumTicket.setMinimumSize(new Dimension((int)ancho,50));
+
+             panelNumTicket.add(jCodigo);
+             
+             JPanel panelProductos = new JPanel();    
+             ayuda.actualizarTicket(panelProductos, ticket.getProductos());
+             
+             panel.add(panelNumTicket);
+             panel.add(panelProductos);
+             
+             totalFactura += ticket.valorProductos();
+        }
+    }
+    
+    /**
+     * Imprimirá el valor total de la factura y lo mostrará en un JPanel
+     * 
+     * @param panel el JPanel en el que se encontrarán
+     */
+    public void imprimirPrecioTotal(JPanel panel)
+    {
+        JLabel jInfo = new JLabel("Precio Total (IVA inc.)");
+        String total = String.format("%29.2f", totalFactura);
+        JLabel jPrecioTotal = new JLabel(total);
+        
+        jInfo.setForeground(COLOR_2);
+        
+        panel.add(jInfo);
+        panel.add(jPrecioTotal);
+        
+        UtilidadesSpring.hacerCuadricula(panel,
+                2, 1,  //filas, columnas
+                500, 10,  //Espacio inicial en X, espacio inicial en Y
+                10, 10); //separacion de los componentes en x, separacion de los componentes en Y
+    }
+}

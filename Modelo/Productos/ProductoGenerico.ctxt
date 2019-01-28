@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=familia\ codigo\ descripcion\ precio\ iva\ stock\ vendido\ nombre
+comment0.target=ProductoGenerico(java.lang.String,\ java.lang.String,\ java.lang.String,\ double,\ double,\ double,\ double,\ java.lang.String)
+comment0.text=\r\n\ Crea\ una\ instancia\ de\ ProductoGenerico\ pasandole\ todos\ los\ valores\ a\ sus\ campos\r\n
+comment1.params=otroProducto
+comment1.target=ProductoGenerico(ProductoGenerico)
+comment1.text=\r\n\ Crea\ una\ instancia\ de\ ProductoGenerico\ a\ partir\ de\ otra\ instancia\ de\ ProductoGenerico.\ Es\ decir,\ realiza\ una\ copia\ del\ producto\ que\ le\ pasamos\r\n\ por\ parametro\ y\ crea\ un\ objeto\ nuevo\r\n\ \r\n\ @param\ otroProducto\ el\ producto\ del\ que\ se\ desea\ realizar\ una\ copia\r\n
+comment2.params=
+comment2.target=java.lang.String\ getNombre()
+comment2.text=\r\n\ Devuelve\ el\ nombre\ del\ producto\r\n\ \r\n\ @return\ \ El\ nombre\ del\ producto\r\n
+comment3.params=nombre
+comment3.target=void\ setNombre(java.lang.String)
+comment3.text=\r\n\ Modifica\ el\ nombre\ del\ producto\ por\ uno\ de\ nuestra\ elecci\u00F3n\r\n\ \r\n\ @param\ \ \ El\ nuevo\ nombre\ del\ producto\r\n
+numComments=4

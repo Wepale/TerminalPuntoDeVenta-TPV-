@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Impresora()
+comment1.params=ticket
+comment1.target=java.lang.String\ imprimirCabecera(Ticket)
+comment2.params=ticket
+comment2.target=void\ imprimirProductos(Ticket)
+numComments=3

@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=nombreFichero\ objeto
+comment0.target=void\ guardarEnFichero(java.lang.String,\ java.lang.Object)
+comment0.text=\r\n\ \ Est\u00E9\ metodo\ recibe\ un\ objeto\ y\ la\ ruta\ de\ un\ archivo\ y\ lo\ alamacena\ en\ \u00E9l.\r\n\ \ \r\n\ \ Se\ usar\u00E1\ para\ guardar\ los\ productos,\ clientes,\ tickets\ y\ facturas.\ Debemos\ pasarle\ como\ parametro\r\n\ \ el\ objeto\ a\ serializar\ y\ la\ ruta\ del\ archivo\ donde\ se\ guardar\u00E1.\r\n\ \r\n\ @param\ nombreFichero\ el\ nombre\ de\ la\ ruta\ donde\ se\ guardar\u00E1\ el\ objeto\r\n\ @param\ objeto\ el\ objeto\ a\ serializar\r\n\ @return\ true\ si\ la\ serializaci\u00F3n\ se\ lleva\ a\ cabo\ de\ forma\ correcta,\ false\ en\ caso\ contrario\r\n
+comment1.params=nombreFichero
+comment1.target=java.lang.Object\ leerDeFichero(java.lang.String)
+comment1.text=\r\n\ \ Est\u00E9\ metodo\ lee\ un\ archivo\ y\ devuelve\ el\ objeto\ contenido\ en\ el.\r\n\ \ \r\n\ \ Se\ usar\u00E1\ para\ leer\ los\ productos,\ clientes,\ tickets\ y\ facturas\ ya\ almacenados\ en\ nuestro\ sistema.\r\n\ \ Debemos\ pasarle\ como\ parametro\ la\ ruta\ del\ archivo\ que\ se\ quiere\ leer.\r\n\ \r\n\ @param\ nombreFichero\ el\ nombre\ de\ la\ ruta\ del\ archivo\ que\ se\ quiere\ leer\r\n\ @return\ Object\ el\ objeto\ que\ contiene\ el\ archivo\r\n
+numComments=2

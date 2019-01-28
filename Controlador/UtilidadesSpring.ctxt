@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=row\ col\ parent\ cols
+comment0.target=javax.swing.SpringLayout.Constraints\ getContencion(int,\ int,\ java.awt.Container,\ int)
+comment0.text=Usuado\ por\ hacerCuadricula
+comment1.params=padre\ filas\ columnas\ inicioX\ inicioY\ xSeparacion\ ySeparacion
+comment1.target=void\ hacerCuadricula(java.awt.Container,\ int,\ int,\ int,\ int,\ int,\ int)
+comment1.text=\r\n\ Alinea\ los\ componentes\ del\ JPanel\ en\ una\ grilla.\ Cada\ componente\ en\ la\ misma\ columna\ ser\u00E1\ tan\ ancho\ como\ el\ componente\ m\u00E1s\ grande\ que\ haya\r\n\ en\ dicha\ columna.\ El\ JPanel\ ser\u00E1\ tan\ grande\ como\ sea\ necesario\ para\ albergar\ a\ todos\ los\ componentes.\r\n\r\n\ @param\ rows\ n\u00FAmero\ de\ filas\r\n\ @param\ cols\ n\u00FAmero\ de\ columnas\r\n\ @param\ initialX\ separacion\ en\ el\ eje\ x\ del\ primer\ componente\ \r\n\ @param\ initialY\ separacion\ en\ el\ eje\ y\ del\ primer\ componente\r\n\ @param\ xPad\ separacion\ en\ el\ eje\ x\ de\ los\ componentes\r\n\ @param\ yPad\ separacion\ en\ el\ eje\ y\ de\ los\ componentes\r\n
+numComments=2

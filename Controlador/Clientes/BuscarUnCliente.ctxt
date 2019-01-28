@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.params=
+comment0.target=BuscarUnCliente()
+comment0.text=\r\n\ Este\ contructor\ solo\ unicializa\ el\ cliente\ a\ valor\ null.\ El\ peso\ se\ esta\ clase\ recaer\u00E1\ sobre\ el\ m\u00E9todo\ preguntarPorCliente(JFrame,ContenedorClientes)\r\n
+comment1.params=
+comment1.target=Modelo.Clientes.Cliente\ getCliente()
+comment1.text=\r\n\ Devuelve\ al\ cliente\ seleccionado\r\n\ \r\n\ @return\ cliente\ el\ cliente\ seleccionado\ null\ si\ se\ ha\ cancelado\ la\ seleccion\ del\ cliente\ por\ cualquir\ motivo.\r\n
+comment2.params=frame
+comment2.target=java.lang.String\ preguntarAtributoCliente(javax.swing.JFrame)
+comment2.text=\r\n\ Este\ m\u00E9todo\ preguntar\u00E1\ al\ usuario\ por\ que\ atributo\ quiere\ buscar\ al\ cliente\ al\ que\ se\ le\ realizar\u00E1\ la\ venta.\ Las\ opciones\ ser\u00E1n\ por\ nombre\ o\ c\u00F3digo.\r\n\ El\ sistema\ t\u00E1mbien\ permitir\u00E1\ la\ opcion\ de\ realizar\ la\ venta\ a\ un\ cliente\ ocasional,\ el\ cual\ no\ existe\ en\ nuestro\ sistema\r\n\ \r\n\ @param\ el\ frame\ padre\r\n\ \r\n\ @return\ \ la\ opcion\ seleccionada\r\n
+comment3.params=frame\ listaClientes
+comment3.target=void\ preguntarCodigo(javax.swing.JFrame,\ Modelo.Contenedores.ContenedorClientes)
+comment3.text=\r\n\ Este\ m\u00E9todo\ pregunta\ al\ usuario\ el\ c\u00F3digo\ del\ cliente\ al\ que\ se\ le\ quiere\ realizar\ la\ venta\r\n\ \r\n\ @param\ frame\ el\ frame\ padre\r\n\ @param\ listaClientes\ Los\ clientes\ que\ existen\ en\ el\ sistema\r\n
+comment4.params=frame\ listaClientes
+comment4.target=void\ preguntarNombre(javax.swing.JFrame,\ Modelo.Contenedores.ContenedorClientes)
+comment4.text=\r\n\ Este\ m\u00E9todo\ pregunta\ al\ usuario\ el\ nombre\ del\ cliente\ al\ que\ se\ le\ desea\ realizar\ la\ venta.\ Si\ existen\ varias\ coincidencias\ se\ le\ pedir\u00E1\r\n\ que\ seleccione\ el\ cliente\ adecuado\r\n\ \r\n\ @param\ frame\ el\ frame\ padre\r\n\ @param\ listaClientes\ \ \ \ Los\ clientes\ que\ existen\ en\ el\ sistema\r\n
+comment5.params=frame\ listaClientes\ otraListaClientes
+comment5.target=void\ verClientes(javax.swing.JFrame,\ Modelo.Contenedores.ContenedorClientes,\ Modelo.Contenedores.ContenedorClientes)
+comment5.text=\r\n\ Est\u00E9\ metodo\ abre\ un\ JDialog\ para\ que\ el\ usuario\ seleccione\ uno\ de\ los\ clientes\ que\ est\u00E9n\ contenidos\ en\ el\ objeto\ otraListaClientes\ que\ se\ le\ pasa\r\n\ como\ parametro.\r\n\ \r\n\ El\ cliente\ seleccionado\ se\ guardar\u00E1\ en\ la\ variable\ de\ instancia\ "cliente".\r\n\ \r\n\ @param\ frame\ el\ frame\ padre\r\n\ @param\ listaClientes\ todos\ los\ clientes\ dados\ de\ alta\ en\ el\ sistema\r\n\ @param\ otraListaClientes\ Los\ clientes\ que\ apareceran\ en\ el\ JDialog\r\n
+comment6.params=frame\ listaClientes
+comment6.target=void\ preguntarPorCliente(javax.swing.JFrame,\ Modelo.Contenedores.ContenedorClientes)
+comment6.text=\r\n\ Este\ m\u00E9todo\ hace\ todo\ lo\ necesario\ para\ que\ el\ usuario\ pueda\ seleccionar\ al\ cliente\ al\ que\ se\ le\ realizar\u00E1\ la\ venta.\ Utilizar\u00E1\ todos\ los\ m\u00E9todos\r\n\ anteriores\ segun\ sea\ necesario.\ Es\ el\ m\u00E9todo\ que\ une\ todos\ los\ m\u00E9todos\ implementados\ en\ esta\ clase\ y\ realiza\ todo\ el\ trabajo,\ es\ aquel\ al\ que\r\n\ deveremos\ invocar\ cuando\ queramos\ seleccionar\ un\ \u00FAnico\ ciente.\r\n\ \r\n\ @param\ frame\ el\ frame\ padre\r\n\ @param\ listaClientes\ la\ lista\ donde\ se\ encuentran\ todos\ los\ clientes\r\n
+numComments=7

@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=familia\ codigo\ descripcion\ precio\ iva\ stock\ vendido\ marca\ modelo\ talla
+comment0.target=ProductoTalla(java.lang.String,\ java.lang.String,\ java.lang.String,\ double,\ double,\ int,\ int,\ java.lang.String,\ java.lang.String,\ java.lang.String)
+comment0.text=\r\n\ Crea\ una\ instancia\ de\ ProductoTalla\ pasandole\ todos\ los\ valores\ a\ sus\ campos\r\n
+comment1.params=otroProducto
+comment1.target=ProductoTalla(ProductoTalla)
+comment1.text=\r\n\ Crea\ una\ instancia\ de\ ProductoTalla\ a\ partir\ de\ otra\ instancia\ de\ ProductoTalla.\ Es\ decir,\ realiza\ una\ copia\ del\ producto\ que\ le\ pasamos\r\n\ por\ parametro\ y\ crea\ un\ objeto\ nuevo\r\n
+comment2.params=
+comment2.target=java.lang.String\ getTalla()
+comment2.text=\r\n\ Devuelve\ la\ talla\ del\ producto\r\n\ \r\n\ @return\ \ \ La\ talla\ del\ rodcuto\r\n
+comment3.params=talla
+comment3.target=void\ setTalla(java.lang.String)
+comment3.text=\r\n\ Modifica\ la\ talla\ del\ producto\r\n\ \r\n\ @param\ \ \ \ talla\ \ \ La\ nueva\ talla\ del\ producto\r\n
+numComments=4

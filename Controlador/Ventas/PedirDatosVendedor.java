@@ -1,0 +1,142 @@
+package Controlador.Ventas;
+
+import Modelo.Ventas.Factura;
+
+import Controlador.UtilidadesSpring;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+/**
+ * Write a description of class PedirDatosVendedor here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class PedirDatosVendedor extends JDialog
+{
+    private JTextField razonSocialTexto;
+    private JTextField cifTexto;
+    
+    private JPanel panelFormulario;
+    private JPanel panelControl;
+    
+    private String razonSocial;
+    private String cif;
+    
+    /**
+     * Constructor. Toda la labor la realizará el metodo construirPanel(Cliente cliente)
+     */
+    public PedirDatosVendedor(JFrame frame)
+    {
+        super(frame, true);
+        setTitle("Rellene sus datos de vendedor");
+        getContentPane().setLayout(new BorderLayout());
+        construirPanel();
+        control(frame);
+        getContentPane().add(panelFormulario, BorderLayout.CENTER);
+        getContentPane().add(panelControl, BorderLayout.SOUTH);
+        setDefaultCloseOperation(0); //No permite cerrar el JDialog
+        pack();
+        setLocationRelativeTo(frame);
+        setVisible(true);
+    }
+    
+    /**
+     * Esté método añadirá los JTextField para que el usuario pueda introducir los datos del cliente. Cada JTextField estará asociado a su JLabel
+     * correspondiente para estar correctamente diferenciado.
+     * 
+     * @param cliente   El cliente que se quiere modificar los datos, null si se quiere crear un nuevo cliente
+     */
+    public void construirPanel()
+    {
+        panelFormulario = new JPanel(new SpringLayout());
+        JLabel razonSocial = new JLabel("Razón Social:");
+        razonSocialTexto = new JTextField(20);
+        razonSocial.setLabelFor(razonSocialTexto);
+ 
+        JLabel cif = new JLabel("CIF:");
+        cifTexto = new JTextField(20);
+        cif.setLabelFor(cifTexto);
+        
+        panelFormulario.add(razonSocial);
+        panelFormulario.add(razonSocialTexto);
+        panelFormulario.add(cif);
+        panelFormulario.add(cifTexto);
+        
+        UtilidadesSpring.hacerCuadricula(panelFormulario,
+        2, 2,  //filas, columnas
+        10, 10,  //espacio inical X, espacio inicial Y
+        10, 10); //espacio compontentes X, espacio componentes Y
+    }
+    
+    /**
+     * Este método obtendrá los datos que el usuario haya introducido en los JTexfield.
+     * 
+     * La única condicion para que los datos sean validos es que los JTextField no queden vacio
+     * 
+     * @return  false si algún JTextField es una cadena vacia, true en caso contrario
+     */
+    
+    public boolean obtenerDatos()
+    {
+        razonSocial = razonSocialTexto.getText();
+        cif = cifTexto.getText();
+        if(razonSocial.equals("") || razonSocial.equals("")){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    /**
+     * Esté método recogerá todos los datos introducidos en los JTextField y guardará los datos
+     * 
+     * ATENCION: Este método no comprueba que los datos introducidos son validos, por ello hay que hacer uso del metodo obtenerDatos(...,...)
+     * y solo invocar a este método cuando nos aseguremos que los datos no tienen nigún error y son completamente válidos
+     */
+    public void guardarDatos()
+    {
+        Factura.setRazonSocial(razonSocial);
+        Factura.setCif(cif);
+    }
+    
+    /**
+     * Añade al panelControl los botones "Aceptar" y "Cancelar"  y define laa acciones a realizar cuando se presionan.
+     * 
+     * Si se presiona el botón Aceptar se recogerán los datos introducidos por el usuario.
+     * Si se presiona el botón Cancelar se cierrá el JDialog y el JFrame principal
+     * 
+     * @param frame el frame padre
+     */
+    public void control(JFrame frame)
+    {
+        panelControl = new JPanel(new FlowLayout());
+        JButton botonAceptar = new JButton("Aceptar");
+        botonAceptar.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                boolean datosCorrectos = obtenerDatos();
+                if(datosCorrectos == false){
+                    JOptionPane.showMessageDialog(null, "Los dos datos son obligatorios, compruebe que no haya quedado ninguno en blanco",
+                                                        "Error", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    guardarDatos();
+                    dispose();
+                    JOptionPane.showMessageDialog(null,"Sus datos como vendedor se han guardado", "Aceptado", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });        
+        
+        JButton botonCancelar = new JButton("Cancelar");
+        botonCancelar.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                System.exit(0);
+            }
+        });
+        
+        panelControl.add(botonAceptar);
+        panelControl.add(botonCancelar);
+    }
+}

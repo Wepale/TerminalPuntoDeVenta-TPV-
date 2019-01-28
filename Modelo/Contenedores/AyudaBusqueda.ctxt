@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.params=cadena
+comment0.target=java.lang.String\ modCadena(java.lang.String)
+comment0.text=\r\n\ Metodo\ para\ pasar\ un\ cadena\ a\ minuscula\ y\ quitarle\ todos\ y\ cada\ uno\ sus\ espacios.\ \r\n\ \r\n\ @param\ cadena\ La\ cadena\ a\ la\ cual\ queremos\ realizar\ la\ modificaci\u00F3n\r\n\ \r\n\ @return\ String\ \ \ La\ cadena\ modificada\r\n
+comment1.params=cadena
+comment1.target=java.lang.String\ modCadena2(java.lang.String)
+comment1.text=\r\n\ M\u00E9todo\ que\ recibe\ una\ cadena\ y\ realiza\ lo\ siguiente\:\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ -Elemina\ los\ espacios\ en\ blanco\ al\ inicio\ al\ final\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ -Transforma\ dos\ o\ m\u00E1s\ espacios\ en\ blanco\ en\ medio\ del\ String\ en\ un\ solo\ espacio\ en\ blanco\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \r\n\ @param\ cadena\ La\ cadena\ a\ la\ cual\ queremos\ realizar\ la\ modificaci\u00F3n\r\n\ \r\n\ @return\ String\ \ \ La\ cadena\ modificada\r\n
+comment2.params=cadena1\ cadena2
+comment2.target=java.lang.String\ modCadena(java.lang.String,\ java.lang.String)
+comment2.text=\r\n\ M\u00E9todo\ que\ recibe\ dos\ cadenas,\ las\ pasa\ a\ min\u00FAscula,\ les\ quita\ todos\ y\ cada\ uno\ de\ sus\ espacios\ y\ las\ concatena.\r\n\ \r\n\ @param\ String\ cadena1\ \ \ \ La\ primera\ cadena\r\n\ @param\ String\ cadena2\ \ \ \ La\ segunda\ cadena\r\n\ \r\n\ @return\ String\ Un\ String\ que\ contendr\u00E1\ las\ dos\ cadenas\ concatenadas,\ en\ min\u00FAscula\ y\ sin\ espacios\ en\ blanco\r\n
+comment3.params=cadena
+comment3.target=java.lang.String[]\ separar(java.lang.String)
+comment3.text=\r\n\ M\u00E9todo\ que\ recibe\ una\ cadena,\ la\ cual\ dividir\u00E1\ en\ palabras\ y\ a\u00F1adir\u00E1\ cada\ una\ a\ un\ vector.\ Este\ metodo\ se\ encargar\u00E1\ automaticamente\ de\r\n\ eleminar\ cualquier\ espacio\ en\ blanco\ al\ final\ y\ al\ principio\ de\ la\ cadena,\ asi\ mismo,\ si\ una\ palabra\ esta\ separada\ de\ otra\ por\ varios\ espacios\r\n\ en\ blanco,\ los\ eliminar\u00E1\ dejando\ solo\ un\ espacio\ entre\ cada\ palabra.\ \r\n\ \r\n\ @param\ String\ cadena\ La\ cadena\ que\ queremos\ dividir\ en\ palabras\r\n\ \r\n\ @return\ \ String[]\ \ \ \ Un\ vector\ con\ todas\ las\ palabras\ que\ contiene\ la\ cadena,\ con\ la\ primera\ palabra\ en\ la\ posici\u00F3n\ 0,\ la\ segunda\ en\ la\ 1\ y\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ asi\ sucesivamente\r\n
+comment4.params=cadena\ vector
+comment4.target=boolean\ coincideTodo(java.lang.String,\ java.lang.String[])
+comment4.text=\r\n\ M\u00E9todo\ que\ recibe\ una\ cadena\ y\ un\ vector\ de\ String\ y\ comprueba\ si\ TODOS\ Y\ CADA\ UNO\ de\ los\ String\ contenidos\ en\ el\ vector\ estan\ incluidos\ en\ la\ cadena\r\n\ \r\n\ @param\ \ \ String\ \ \ La\ cadena\ en\ la\ que\ queramos\ buscar\ coincidencias\r\n\ @param\ \ \ String[]\ El\ vector\ con\ las\ palabras\ que\ queremos\ buscar\r\n\ \r\n\ @return\ true\ si\ la\ cadena\ contiene\ todas\ las\ palabras\ que\ contiene\ el\ vector,\ false\ en\ caso\ contrario\r\n
+comment5.params=cadena\ vector
+comment5.target=boolean\ coincideAlgo(java.lang.String,\ java.lang.String[])
+comment5.text=\r\n\ M\u00E9todo\ que\ recibe\ una\ cadena\ y\ un\ vector\ de\ String\ y\ comprueba\ si\ ALGUNO\ de\ los\ String\ contenidos\ en\ el\ vector\ es\ IGUAL\ a\ la\ cadena\r\n\ \r\n\ @param\ \ \ String\ \ \ La\ cadena\ en\ la\ que\ queramos\ buscar\ coincidencias\r\n\ @param\ \ \ String[]\ El\ vector\ con\ las\ palabras\ que\ queremos\ buscar\r\n\ \r\n\ @return\ true\ si\ la\ cadena\ es\ igual\ a\ alguna\ palabras\ que\ contiene\ el\ vector,\ false\ en\ caso\ contrario.\r\n
+numComments=6

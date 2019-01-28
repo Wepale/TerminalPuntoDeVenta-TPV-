@@ -1,0 +1,124 @@
+package Controlador.Productos;
+import Modelo.Contenedores.ContenedorProductos;
+import Controlador.Productos.FormulariosProducto.*;
+import Modelo.Productos.*;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+/**
+ * Write a description of class VentanaProducto here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class VentanaProducto extends JDialog
+{
+    private static final String CREAR_1 = "Producto Generico";
+    private static final String CREAR_2 = "Producto con marca y modelo";
+    private static final String CREAR_3 = "Producto con marca, modelo y talla";
+    private int datosCorrectos;
+    
+    private NuevoProductoBase panelFormulario;
+    private JPanel panelControl;
+    private JButton botonAceptar;
+    private JButton botonCancelar;
+    
+    public VentanaProducto(ContenedorProductos c, ProductoBase producto)
+    {
+        setTitle("Rellene el formulario");
+        getContentPane().setLayout(new BorderLayout());
+        formulario(producto);
+        control(c, producto);
+        getContentPane().add(panelFormulario, BorderLayout.CENTER);
+        getContentPane().add(panelControl, BorderLayout.SOUTH);
+        setLocationRelativeTo(null);
+        pack();
+        setVisible(true);
+    }
+    
+    public VentanaProducto()
+    {
+        //No hacer nada
+    }
+    
+    public String getCrear1()
+    {
+        return CREAR_1;
+    }
+    public String getCrear2()
+    {
+        return CREAR_2;
+    }
+    public String getCrear3()
+    {
+        return CREAR_3;
+    }
+    
+    public void formulario(ProductoBase producto)
+    {
+        if(producto == null){
+            Object seleccion = JOptionPane.showInputDialog(
+                                    null,
+                                    "Selecione el tipo del nuevo producto a crear",
+                                    "Nuevo Producto",
+                                    JOptionPane.QUESTION_MESSAGE,
+                                    null,  // null para icono defecto
+                                    new String[] { CREAR_1, CREAR_2, CREAR_3 }, 
+                                    CREAR_1);
+            if(seleccion == null){
+                //No hacer nada
+            }else if(seleccion.equals(CREAR_1)){
+                panelFormulario = new NuevoProductoGenerico(null);
+            }else if(seleccion.equals(CREAR_2)){
+                panelFormulario = new NuevoProductoMarca(null);
+            }else{
+                panelFormulario = new NuevoProductoTalla(null);
+            }   
+        }else{
+            if(producto instanceof ProductoGenerico){
+                panelFormulario = new NuevoProductoGenerico(producto);
+            }else if(producto instanceof ProductoMarca){
+                panelFormulario = new NuevoProductoMarca(producto);
+            }else{
+                panelFormulario = new NuevoProductoTalla(producto);
+            }
+        }
+    }
+    
+    public void control(ContenedorProductos contenedor, ProductoBase producto)
+    {
+        panelControl = new JPanel(new FlowLayout());
+        botonAceptar = new JButton("Aceptar");
+        botonAceptar.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                datosCorrectos = panelFormulario.obtenerDatos(contenedor, producto);
+                if(datosCorrectos == 3){
+                    panelFormulario.crearProducto(contenedor,producto);
+                    dispose();
+                    if(producto == null){
+                        JOptionPane.showMessageDialog(null,"El producto se ha creado correctamente y ha sido añadido al inventario");
+                    }else{
+                        JOptionPane.showMessageDialog(null,"El producto ha sido modificado correctamente");
+                    }
+                }else if(datosCorrectos == 2){
+                    JOptionPane.showMessageDialog(null, "El precio/iva/stock deben ser valores numericos, intentelo de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
+                }else if(datosCorrectos == 1){
+                    JOptionPane.showMessageDialog(null, "Es obligatorio introducir un código, intentelo de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null, "El código introducido ya pertenece a un producto, introduzca otro código", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        
+        botonCancelar = new JButton("Cancelar");
+        botonCancelar.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });  
+        panelControl.add(botonAceptar);
+        panelControl.add(botonCancelar);
+    }
+}

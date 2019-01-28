@@ -1,0 +1,90 @@
+package Vista;
+import Vista.PanelesGenerales.*;
+import Modelo.Contenedores.*;
+import java.awt.*;
+import javax.swing.*;
+
+
+/**
+ * Write a description of class Panel here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Panel extends JPanel
+{
+    private JPanel sur;
+    private JPanel centro;
+    
+    private PanelOeste oeste;
+    //private PanelCentral central;
+    private PanelNorte norte;
+    private PanelScrollSur scrollSur;
+    
+    //private Icon imagen= new ImageIcon(getClass().getResource("tpv.png"));
+    
+    public Panel(JFrame frame, ContenedorProductos contenedor, ContenedorClientes lista, ContenedorTickets archivador, ContenedorFacturas archivadorFacturas)
+    {
+        crearPanelPrincipal(frame, contenedor, lista, archivador, archivadorFacturas);
+    }
+    /*
+    public JPanel crearPanelNorte()
+    {
+        norte = new JPanel(new FlowLayout());
+        
+        JButton botonProductos = new JButton("Buscar Productos");
+        norte.add(botonProductos);
+        
+        JButton botonClientes = new JButton("Buscar Clientes");
+        norte.add(botonClientes);
+        
+        JButton botonTickets = new JButton("Buscar tickets");
+        norte.add(botonTickets);
+        
+        JButton botonFacturas = new JButton("Buscar Facturas");
+        norte.add(botonFacturas);
+        
+        JButton botonListados = new JButton("Listados");
+        norte.add(botonListados);
+        
+        return norte;
+    }
+    */
+    public JScrollPane crearPanelSur()
+    {
+        sur = new JPanel();
+        sur.setBorder(BorderFactory.createEtchedBorder());
+        JLabel etiqueta = new JLabel("TPV version 1");
+        sur.add(etiqueta);
+        scrollSur = new PanelScrollSur(sur, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        return scrollSur;
+    }
+    
+    public JScrollPane crearPanelCentral()
+    {
+        centro = new JPanel();
+        centro.setBorder(BorderFactory.createEtchedBorder());
+        JLabel etiqueta = new JLabel("Eliga una opción para continuar");
+        centro.add(etiqueta);
+        JScrollPane scroll = new JScrollPane(centro, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        return scroll;
+
+    }
+    
+    public void crearPanelPrincipal(JFrame frame, ContenedorProductos contenedor, ContenedorClientes lista, ContenedorTickets archivador, ContenedorFacturas archivadorFacturas)
+    {
+        setLayout(new BorderLayout(15,10));
+        
+        add(crearPanelSur(), BorderLayout.SOUTH);
+        
+        add(crearPanelCentral(), BorderLayout.CENTER);
+        
+        oeste = new PanelOeste(frame, contenedor, lista, archivador, archivadorFacturas, centro);
+        add(oeste, BorderLayout.WEST);
+        
+        norte = new PanelNorte(frame, contenedor, lista, archivador, archivadorFacturas centro);
+        add(norte, BorderLayout.NORTH);
+        
+        add(new JPanel(), BorderLayout.EAST);
+    }
+}

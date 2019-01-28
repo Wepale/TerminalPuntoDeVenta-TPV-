@@ -1,0 +1,27 @@
+#BlueJ class context
+comment0.params=frame\ contenedor
+comment0.target=SeleccionarProducto(javax.swing.JFrame,\ Modelo.Contenedores.ContenedorProductos)
+comment0.text=\r\n\ Crea\ el\ JDialog\ completamente\ funcional\ con\ todo\ lo\ necesario\ para\ que\ le\ usuario\ pueda\ seleccionar\ un\ producto\r\n\ \r\n\ @param\ frame\ el\ frame\ padre\r\n\ @param\ contenedor\ los\ productos\ a\ seleccionar\r\n
+comment1.params=
+comment1.target=java.lang.String\ getCodigoProducto()
+comment1.text=\r\n\ Devulve\ la\ variable\ de\ instancia\ codigoProducto\r\n\ \r\n\ @return\ \ codigoProducto\ el\ c\u00F3digo\ del\ producto\ seleccionado,\ null\ si\ se\ ha\ cancelado\ la\ seleccion\r\n
+comment2.params=
+comment2.target=javax.swing.JButton\ getAceptar()
+comment2.text=\r\n\ Devuelve\ el\ boton\ aceptar\r\n\ \r\n\ @return\ \ JButton\ el\ boton\ aceptar\r\n
+comment3.params=
+comment3.target=javax.swing.JButton\ getCancelar()
+comment3.text=\r\n\ Devuelve\ el\ boton\ cancelar\r\n\ \r\n\ @return\ \ JButton\ el\ boton\ cancelar\r\n
+comment4.params=contenedor
+comment4.target=void\ crearOpciones(Modelo.Contenedores.ContenedorProductos)
+comment4.text=\r\n\ Por\ cada\ producto\ que\ haya\ en\ el\ objeto\ ContenedorProductos\ crear\u00E1\ un\ JRadioButton\ y\ lo\ introducir\u00E1\ en\ un\ JPanel\r\n\ \r\n\ @param\ \ \ contenedor\ \ contiene\ los\ productos\ a\ mostrar\r\n
+comment5.params=
+comment5.target=java.lang.String\ comprobarEleccion()
+comment5.text=\r\n\ Comprueba\ que\ boton\ ha\ selecionado\ el\ usuario\ y\ devuelve\ el\ codigo\ del\ producto\ asociado\r\n\ \r\n\ @return\ \ String\ el\ codig\ del\ producto\ que\ se\ ha\ seleccionado\r\n
+comment6.params=
+comment6.target=void\ control()
+comment6.text=\r\n\ Crear\ dos\ botones\ y\ sus\ correspondientes\ acciones\ y\ los\ introduce\ un\ un\ JPanel\ con\ FlowLayout.\ Si\ se\ presiona\ "Aceptar"\ se\ comprobar\u00E1\ que\ producto\r\n\ a\ seleccionado\ el\ usuario\ y\ guardar\u00E1\ el\ c\u00F3digo\ en\ el\ campo\ "codigoProducto".\ Si\ se\ presiona\ "Cancelar"\ de\ cierra\ el\ JDialog\ y\ la\ variable\ codigoProducto\r\n\ tendr\u00E1\ valor\ null.\r\n
+comment7.params=e
+comment7.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment8.params=e
+comment8.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=9

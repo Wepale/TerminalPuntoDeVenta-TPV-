@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.params=familia\ codigo\ descripcion\ precio\ iva\ stock\ vendido\ marca\ modelo
+comment0.target=ProductoMarca(java.lang.String,\ java.lang.String,\ java.lang.String,\ double,\ double,\ int,\ int,\ java.lang.String,\ java.lang.String)
+comment0.text=\r\n\ Crea\ una\ instancia\ de\ ProductoMarca\ pasandole\ todos\ los\ valores\ a\ sus\ campos\r\n
+comment1.params=otroProducto
+comment1.target=ProductoMarca(ProductoMarca)
+comment1.text=\r\n\ Crea\ una\ instancia\ de\ ProductoMarca\ a\ partir\ de\ otra\ instancia\ de\ ProductoMarca.\ Es\ decir,\ realiza\ una\ copia\ del\ producto\ que\ le\ pasamos\r\n\ por\ parametro\ y\ crea\ un\ objeto\ nuevo\r\n\ \r\n\ @param\ otroProducto\ el\ producto\ del\ que\ se\ desea\ realizar\ una\ copia\r\n
+comment2.params=
+comment2.target=java.lang.String\ getMarca()
+comment2.text=\r\n\ Devuelve\ la\ marca\ de\ producto\r\n\ \r\n\ @return\ \ La\ marca\ del\ producto\r\n
+comment3.params=
+comment3.target=java.lang.String\ getModelo()
+comment3.text=\r\n\ Devuelve\ el\ modelo\ del\ producto\r\n\ \r\n\ @return\ \ El\ modelo\ del\ producto\r\n
+comment4.params=
+comment4.target=java.lang.String\ getNombre()
+comment4.text=\r\n\ Devuelve\ el\ nombre\ y\ el\ modelo\ en\ una\ sola\ cadena\r\n\ \r\n\ @return\ \ La\ marca\ y\ el\ modelo\ en\ una\ sola\ cadena\r\n
+comment5.params=marca
+comment5.target=void\ setMarca(java.lang.String)
+comment5.text=\r\n\ Modifica\ la\ marca\ el\ producto\r\n\ \r\n\ @param\ \ \ La\ nueva\ marca\ del\ producto\r\n
+comment6.params=modelo
+comment6.target=void\ setModelo(java.lang.String)
+comment6.text=\r\n\ Modifica\ el\ modelo\ del\ producto\r\n\ \r\n\ @param\ \ \ El\ nuevo\ modelo\ del\ producto\r\n
+numComments=7

@@ -1,0 +1,32 @@
+#BlueJ class context
+comment0.params=tickets\ cliente
+comment0.target=Factura(Modelo.Contenedores.ContenedorTickets,\ Modelo.Clientes.Cliente)
+comment0.text=\r\n\ Crear\u00E1\ una\ factura\ con\ todos\ los\ tickets\ que\ se\ deseen\ y\ el\ cliente\ al\ que\ pertenecen\r\n\ \r\n\ @param\ tickets\ los\ tickets\ que\ se\ desean\ facturar\r\n\ @param\ cliente\ el\ cliente\ al\ que\ se\ desea\ facturar\r\n
+comment1.params=otraFactura
+comment1.target=Factura(Factura)
+comment1.text=\r\n\ Realiza\ una\ copia\ de\ una\ factura,\ creando\ una\ factura\ completamente\ nueva\r\n\ \r\n\ @param\ otraFactura\ la\ factura\ que\ se\ desea\ copiar\r\n
+comment2.params=
+comment2.target=java.lang.String\ getCif()
+comment2.text=\r\n\ Devuelve\ el\ cif\ del\ vendedor\r\n\ \r\n\ @return\ el\ cif\ del\ vendedor\r\n
+comment3.params=
+comment3.target=java.lang.String\ getRazonSocial()
+comment3.text=\r\n\ Devuelve\ la\ Raz\u00F3n\ Social\ del\ vendedor\r\n\ \r\n\ @return\ la\ raz\u00F3n\ social\ del\ vendedor\r\n
+comment4.params=
+comment4.target=Modelo.Contenedores.ContenedorTickets\ getTickets()
+comment4.text=\r\n\ Devuelve\ los\ tickets\ contenidos\ en\ esta\ factura\r\n\ \r\n\ @return\ ContenedorTickets\ \ \ \ Los\ tickets\ contenidos\ en\ esta\ factura\r\n
+comment5.params=
+comment5.target=Modelo.Clientes.Cliente\ getCliente()
+comment5.text=\r\n\ Devuelve\ el\ cliente\ al\ que\ pertenece\ esta\ factura\r\n\ \r\n\ @return\ \ Cliente\ El\ cliente\ al\ que\ pertenece\ esta\ factura\r\n
+comment6.params=
+comment6.target=java.util.Calendar\ getFecha()
+comment6.text=\r\n\ Devuelve\ la\ fecha\ de\ la\ factura\r\n\ \r\n\ @return\ \ Calendar\ \ \ \ La\ fecha\ de\ la\ factura\r\n
+comment7.params=nuevaRazon
+comment7.target=void\ setRazonSocial(java.lang.String)
+comment7.text=\r\n\ Modifica\ la\ Raz\u00F3n\ Social\ del\ vendedor\r\n\ \r\n\ @param\ razonSocial\ la\ nueva\ raz\u00F3n\ social\ del\ vendedor\r\n
+comment8.params=nuevoCif
+comment8.target=void\ setCif(java.lang.String)
+comment8.text=\r\n\ Modifica\ el\ CIF\ del\ vendedor\r\n\ @param\ cif\ el\ nuevo\ CIF\ del\ vendedor\r\n
+comment9.params=tipo
+comment9.target=java.lang.String\ getFecha(int)
+comment9.text=\r\n\ Depende\ del\ valor\ introducido\ como\ parametro,\ este\ m\u00E9todo\ devolver\u00E1\ el\ c\u00F3digo\ identificativo\ de\ la\ factura,\r\n\ el\ cual\ ser\u00E1\ la\ fecha\ de\ la\ creaci\u00F3n\ siguiendo\ el\ siguiente\ formato\:\ \r\n\ \ \ \ \ \ \r\n\ \ \ \ \ \ \ \ \ \ \ \ AAAAMMDDHHmmSS\r\n\ \ \ \ \ \ \ \ \ \ \ \ \r\n\ O\ bien\ la\ fecha\ de\ creaci\u00F3n\ de\ la\ factura\ siguiente\ el\ siguiente\ formato\:\r\n\ \r\n\ \ \ \ \ \ \ \ \ \ \ DD/MM/AAAA\ HH\:mm\:SS\r\n\ \ \ \ \ \ \ \ \ \ \ \r\n\ \ \ \ \ \ \ \ \ \ \ \r\n\ \ \ Siendo\ AAAA\=a\u00F1o,\ MM\=mes,\ DD\=dia,\ HH\=hora,\ mm\=minuto,\ SS\=segundo.\r\n\ \ \ \r\n\ @param\ tipo\ la\ variable\ final\ CODIGO\ si\ se\ desea\ el\ c\u00F3digo\ o\ la\ variable\ final\ FECHA\ si\ se\ desea\ la\ fecha.\ Si\ se\ introduce\ otro\ valor,\r\n\ \ \ \ \ \ \ \ devolver\u00E1\ una\ cadena\ vac\u00EDa\r\n\ \ \ \ \ \ \ \ \r\n\ @return\ String\ la\ fecha\ en\ formato\ String\ o\ el\ c\u00F3digo.\r\n
+numComments=10

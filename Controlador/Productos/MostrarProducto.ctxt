@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.params=frame
+comment0.target=java.lang.String\ preguntarAtributo(javax.swing.JFrame)
+comment0.text=\r\n\ Pregunta\ al\ usuario\ al\ atributo\ por\ el\ que\ quiere\ buscar\ coincidencias\r\n\ \r\n\ @return\ \ String\ Un\ String\ con\ la\ opcion\ seleccionada\r\n
+comment1.params=frame\ contenedor\ seleccion
+comment1.target=Modelo.Contenedores.ContenedorProductos\ buscarPorAtributo(javax.swing.JFrame,\ Modelo.Contenedores.ContenedorProductos,\ java.lang.String)
+comment1.text=\r\n\ Nos\ permite\ encontrar\ aquellos\ productos\ que\ concuerden\ con\ los\ datos\ introducidos\ por\ el\ usuario\ y\ el\ atributo\ seleccionado\r\n\ \r\n\ @param\ \ \ contenedor\ \ El\ objeto\ ContendorProducto\ donde\ estar\u00E1n\ contenidos\ los\ productos\r\n\ @param\ \ \ seleccion\ \ \ El\ atributo\ en\ el\ que\ queremos\ buscar\ coincidencias\r\n\ \r\n\ @return\ \ ContendorClientes\ \ \ Todos\ los\ clientes\ que\ concuerden\ con\ los\ datos\ introducidos\ por\ el\ usuario\r\n
+comment2.params=panel
+comment2.target=void\ imprimirCabecera(javax.swing.JPanel)
+comment2.text=\r\n\ La\ cabecera\ para\ organizar\ los\ datos\ de\ los\ productos\r\n\ \r\n\ @param\ Panel\ El\ panel\ donde\ se\ va\ a\ introducir\ esta\ cabecera\r\n
+comment3.params=contenedor\ panel
+comment3.target=void\ imprimirProductos(Modelo.Contenedores.ContenedorProductos,\ javax.swing.JPanel)
+comment3.text=\r\n\ Muestra\ la\ informaci\u00F3n\ de\ los\ productos\ en\ un\ JPanel\r\n\ \r\n\ @param\ \ \ contenedor\ \ El\ objeto\ ContendorProductos\ que\ contiene\ los\ productos\ que\ quermos\ mostrar\r\n\ @param\ \ \ JPanel\ \ El\ JPanel\ donde\ se\ mostraran\r\n
+comment4.params=contenedor\ panel
+comment4.target=void\ cuadricular(Modelo.Contenedores.ContenedorProductos,\ javax.swing.JPanel)
+comment4.text=\r\n\ Organiza\ la\ informacion\ de\ los\ productos\ en\ el\ JPanel.\r\n\ \r\n\ @param\ contendor\ \ Un\ objeto\ ContendorProductos\ con\ los\ productos\ (debe\ contener\ los\ mismos\ productos\ que\ introdujeron\ en\ el\ JPanel)\r\n\ @param\ JPanel\ El\ JPanel\ a\ ordenar,\ con\ la\ informacion\ ya\ introducida\ en\ \u00E9l\r\n
+comment5.params=frame\ contenedor\ panel
+comment5.target=void\ imprimirResultados(javax.swing.JFrame,\ Modelo.Contenedores.ContenedorProductos,\ javax.swing.JPanel)
+comment5.text=\r\n\ Pregunta\ al\ usuario\ por\ que\ atributo\ desea\ buscar\ coincidencias\ en\ los\ productos\ y\ los\ muestra\ por\ pantalla\r\n\ \r\n\ @param\ \ \ lista\ \ \ Contiene\ los\ clientes\ en\ los\ que\ se\ quiere\ buscar\ conincidencias\r\n\ @param\ \ \ panel\ \ \ El\ JPanel\ donde\ se\ mostrar\u00E1n\ los\ clientes\r\n
+numComments=6

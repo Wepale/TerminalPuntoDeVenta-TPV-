@@ -1,0 +1,14 @@
+Controlador
+Controlador.Clientes
+Controlador.Listados
+Controlador.Productos
+Controlador.Productos.FormulariosProducto
+Controlador.Ventas
+Modelo.Clientes
+Modelo.Contenedores
+Modelo.Listados
+Modelo.Productos
+Modelo.Serializacion
+Modelo.Ventas
+Vista
+Vista.PanelesGenerales
